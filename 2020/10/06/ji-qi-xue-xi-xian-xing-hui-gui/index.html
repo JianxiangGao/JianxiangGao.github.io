@@ -469,14 +469,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    292
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -554,6 +554,70 @@
 </ul>
 <p><img src="/img/IMG_0183(20201007-143658).PNG"></p>
 <p><img src="/img/IMG_0182(20201007-143424).PNG"></p>
+<ul>
+<li><p>年龄X1和工资X2都会对输出产生影响，但我们不知道影响什么样的，所以假设了两个参数</p>
+</li>
+<li><p>θ1和θ2是<strong>权重参数</strong>，对最终的结果会产生较大的影响（因为权重参数与数据X1,X2组合在一起了）</p>
+</li>
+<li><p>θ0是<strong>偏置参数</strong>，对结果会产生较小的影响（偏置参数只是自己单独一个）</p>
+</li>
+<li><p>因为机器学习的思想——是能用简单的方法做，所以我们需要对长式子进行整合，化简</p>
+</li>
+<li><p>化简求和时，发现多了θ0*X0，X0虽然不是数据中的一个特征，但是我们可以在数据中额外加入一列X0，只不过X0都是为1</p>
+</li>
+<li><p>在后面的实践中，会经常加入额外的一列都是1，它们都是没用的，只不过是为了拟合平面的公式整合得更工整简单</p>
+</li>
+<li><p>因为通常数据复杂度都很高，所以我们需要转换数据的格式，标准的格式为<strong>矩阵格式</strong></p>
+</li>
+</ul>
+<h2 id="3-误差"><a href="#3-误差" class="headerlink" title="3. 误差"></a>3. 误差</h2><p><img src="/img/IMG_0184(20201007-150245).PNG"></p>
+<ul>
+<li>从右侧的图片上来看，平面并没有完全拟合，平面上下存在很多个红色的点（即真实值）</li>
+<li>用机器学习解决一个问题时，理论模型和现实模型必然存在差异，但只要合理的利用这个差异，就是可以的</li>
+<li>y表示真实值，θ*x表示预测值，ϵ表示误差</li>
+</ul>
+<p><img src="/img/IMG_0185(20201007-151143).PNG"></p>
+<ul>
+<li><p><strong>独立</strong>：算法会同等的对待每一个样本，每个数据、样本都没有任何关系</p>
+<p>e.g.张三李四去银行贷款，银行不会以为借给张三钱少，借给李四的钱就多，银行会根据每个人的指标去评估</p>
+</li>
+<li><p><strong>同分布</strong>：数据来自同样的一个地方</p>
+<p>e.g. 张三去的建设银行，李四去的农业银行，两个不同的银行数据混合一起建立模型时不符合逻辑的，各自银行建立各自的模型-</p>
+</li>
+<li><p><strong>高斯分布</strong>：就是正态分布</p>
+</li>
+</ul>
+<p><img src="/img/IMG_0186(20201007-152320).PNG"></p>
+<h2 id="4-似然函数"><a href="#4-似然函数" class="headerlink" title="4. 似然函数"></a>4. 似然函数</h2><p><img src="/img/IMG_0187(20201007-152527).PNG"></p>
+<p>e.g. 假如我今天要去赌博，但我不知道今天我是会赢还是会输，可能我的输赢服从着赌场的某一种规则，但这个规则我不知道，所以我在赌场门口蹲人，蹲了10个人中9个人挣钱了、1个人没挣钱，因此，不管赌场服从着什么规则，反正我今天进去了就有90%的可能性挣钱</p>
+<ul>
+<li><p><strong>似然函数</strong>就是根据样本去估计参数值，即参数估计</p>
+</li>
+<li><p>什么样的参数与数据组合后，更接近真实值，即它<strong>是真实值的可能性（概率）越大越好</strong>，即<strong>最大似然估计</strong></p>
+</li>
+<li><p>似然函数是一个累乘公式，所以取对数，把乘法转换为加法，计算就会简单</p>
+</li>
+</ul>
+<p><img src="/img/IMG_0188(20201007-153751).PNG"></p>
+<ul>
+<li>因为我们是做极大似然估计，让结果值越大越好，所以我们要让“减号”后面的式子越小越好</li>
+<li>引入一个目标函数J(θ)，让它越小越好，发现这是一个最小二乘法</li>
+</ul>
+<blockquote>
+<p>Tag</p>
+<p>面试笔试最爱考的三个点：</p>
+<ol>
+<li>为什么引入似然函数</li>
+<li>为什么要对似然函数进行log变换</li>
+<li>为什么要让右边的式子越小越好</li>
+</ol>
+</blockquote>
+<p>aa</p>
+<p><img src="/img/IMG_0189(20201007-154600).PNG"></p>
+<ul>
+<li>求偏导：因为我们要使得J(θ)最小，即求一个θ值最小值，即偏导=0</li>
+</ul>
+<h2 id="5-评估方法"><a href="#5-评估方法" class="headerlink" title="5. 评估方法"></a>5. 评估方法</h2><p><img src="/img/IMG_0190(20201007-155645).PNG"></p>
 
             </div>
             <hr/>
@@ -803,7 +867,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是数据挖掘；数据挖掘的重要性；数据科学的基本概念；主要数据挖掘任务；数据挖掘的开放挑战；
+                            什么是线性回归；拟合曲线；误差；似然函数；评估方法；
                         
                     </div>
                     <div class="publish-info">
@@ -1083,7 +1147,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">3.2k</span>&nbsp;字
+                class="white-color">4k</span>&nbsp;字
             
             
             

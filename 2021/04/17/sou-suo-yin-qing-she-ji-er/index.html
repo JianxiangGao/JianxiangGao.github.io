@@ -855,7 +855,7 @@ app<span class="token punctuation">.</span>secret_key <span class="token operato
 <ul>
 <li><strong>注意</strong>：更换权重前，先点击<code>Clear Dataset</code>，然后再创建新的Dataset，否则dataset中的数据会叠加重复。</li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本项目是在学习完Information Retrieval课程后，为了充分理解并使用学过的内容，因此用Python调用Elasticsearch的API，并穿插使用了以下Kibana，最后用Flask实现了一个简单的电影搜索引擎。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本项目是在学习完Information Retrieval课程后，为了充分理解并使用学过的内容，因此用Python调用Elasticsearch的API，并穿插使用了一下Kibana，最后用Flask实现了一个简单的电影搜索引擎。</p>
 <p>其中，BM25F模型，参考了论文：<a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/1031171.1031181">Simple BM25 Extension to Multiple Weighted Fields</a></p>
 <ul>
 <li>索引&amp;检索模型：本设计直接使用了Elasticsearch中的内置的索引以及BM25检索方法，但是为了更好地理解，可以尝试不结合Elasticsearch，而直接用Python编写Index，各种检索model的方法，去实现搜索引擎。</li>

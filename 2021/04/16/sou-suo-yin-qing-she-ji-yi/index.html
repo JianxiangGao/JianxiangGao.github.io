@@ -664,7 +664,7 @@ movie_json <span class="token operator">=</span> <span class="token punctuation"
 <li>为了通过BulkAPI添加文档，需要将我通过抓取网站收集的JSON转换为Bulk JSON。但是需要添加一个小的Python脚本来对我收集的数据进行修改，并使用Python通过BulkAPI进行数据添加。</li>
 </ul>
 <blockquote>
-<p>您可以自己尝试一下，只需运行下面的**<em>InsertDataToES.py**</em>。另外，如果您在读取文件和添加任何字符替换时具有自己的数据和操作，请尝试修改以下脚本。Index的创建，documents的添加和搜索也可以使用python和elasticsearch库完成。</p>
+<p>您可以自己尝试一下，只需运行下面的<code>InsertDataToES.py</code>。另外，如果您在读取文件和添加任何字符替换时具有自己的数据和操作，请尝试修改以下脚本。Index的创建，documents的添加和搜索也可以使用python和elasticsearch库完成。</p>
 </blockquote>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> elasticsearch
 <span class="token keyword">from</span> elasticsearch <span class="token keyword">import</span> Elasticsearch<span class="token punctuation">,</span> helpers

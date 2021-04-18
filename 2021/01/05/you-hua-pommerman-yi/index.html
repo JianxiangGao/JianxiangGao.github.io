@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="数据挖掘(第二章) 数据, 高健翔的博客">
+    <meta name="keywords" content="基于MCTS算法的Pommerman游戏AI代理的优化(一), 高健翔的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>数据挖掘(第二章) 数据 | 高健翔的博客</title>
+    <title>基于MCTS算法的Pommerman游戏AI代理的优化(一) | 高健翔的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">数据挖掘(第二章) 数据</h1>
+                    <h1 class="description center-align post-title">基于MCTS算法的Pommerman游戏AI代理的优化(一)</h1>
                 </div>
             </div>
         </div>
@@ -430,8 +430,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Data-Mining/">
-                                <span class="chip bg-color">Data Mining</span>
+                            <a href="/tags/AI/">
+                                <span class="chip bg-color">AI</span>
+                            </a>
+                        
+                            <a href="/tags/Monte-Carlo-tree-search/">
+                                <span class="chip bg-color">Monte Carlo tree search</span>
                             </a>
                         
                     </div>
@@ -442,8 +446,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Data-Mining/" class="post-category">
-                                Data Mining
+                            <a href="/categories/AI/" class="post-category">
+                                AI
                             </a>
                         
                     </div>
@@ -455,28 +459,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-09-28
+                    2021-01-05
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-01
+                    2021-04-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    6 分
                 </div>
                 
 
@@ -491,103 +495,256 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="数据挖掘-第二章-数据"><a href="#数据挖掘-第二章-数据" class="headerlink" title="数据挖掘 (第二章) 数据"></a>数据挖掘 (第二章) 数据</h1><h2 id="2-1-数据对象、属性"><a href="#2-1-数据对象、属性" class="headerlink" title="2.1 数据对象、属性"></a>2.1 数据对象、属性</h2><p>数据集由数据对象组成，一个<strong>数据对象</strong>代表一个实体。例如，</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本项目是由我与两位大佬(Peiyao Wang，Yuze Liu)共同完成，旨在通过阅读蒙特卡罗树搜索(MCTS)相关文献，在Pommerman游戏环境中，从不同方向来优化Pommerman的AI代理(agents)，并通过实验数据对比分析优劣。</p>
+<p><strong>我们的项目最后在Pommerman(FFA模式)比赛中，从众多AI Agents中脱颖而出，最后夺得第二名的好成绩，再次感谢这两位大佬做出的贡献。</strong></p>
+<p>我们优化的方向包括：</p>
 <ul>
-<li>医疗数据库中，对象可以是患者</li>
-<li>大学数据库中，对象可以是学生、教授、课程</li>
-<li>销售数据库中，对象可以是顾客、商品</li>
+<li>8种基于基本UCT算法(Upper Confidence Bound Apply to Tree)对tree policy进行优化的算法，包括：<ul>
+<li>Bayesian UCT</li>
+<li>AMAF</li>
+<li>α-AMAF</li>
+<li>Cut-off AMAF</li>
+<li>ε-greedy</li>
+<li>Decaying ε-greedy</li>
+<li>First Play Urgency (FPU)</li>
+<li>Progressive Bias</li>
 </ul>
-<h3 id="2-1-1-什么是属性"><a href="#2-1-1-什么是属性" class="headerlink" title="2.1.1 什么是属性"></a>2.1.1 什么是属性</h3><p><strong>属性</strong>(attribute)是一个数据字段，表示数据对象的一个特征。</p>
-<blockquote>
-<p>e.g.</p>
-<p>描述顾客对象的属性——<em>custom_ID</em>, <em>name</em> 和 <em>address</em></p>
+</li>
+<li>2种反向传播优化方法<ul>
+<li>Minimax</li>
+<li>weighted-backup </li>
+</ul>
+</li>
+</ul>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="Pommerman游戏介绍"><a href="#Pommerman游戏介绍" class="headerlink" title="Pommerman游戏介绍"></a>Pommerman游戏介绍</h3><blockquote>
+<p>详细介绍：<a target="_blank" rel="noopener" href="https://github.com/GAIGResearch/java-pommerman/wiki">https://github.com/GAIGResearch/java-pommerman/wiki</a></p>
+<p>详细规则：<a target="_blank" rel="noopener" href="https://github.com/GAIGResearch/java-pommerman/wiki/Pommerman-Game-Rules">https://github.com/GAIGResearch/java-pommerman/wiki/Pommerman-Game-Rules</a></p>
 </blockquote>
-<p>属性的类型可以分为：<strong>标称属性</strong>、<strong>二元属性</strong>、<strong>序数属性</strong>、<strong>数值属性</strong></p>
-<h3 id="2-1-2-标称属性"><a href="#2-1-2-标称属性" class="headerlink" title="2.1.2 标称属性"></a>2.1.2 标称属性</h3><p><strong>标称属性</strong>(nominal attribute)的值是一些符号或事物的名字。</p>
-<blockquote>
-<p>e.g.</p>
-<p>hair_color(头发颜色): black, white, yellow…</p>
-<p>occupation(职业): teacher, doctor…</p>
-</blockquote>
-<p>可以看出以上的标称属性，如果用数学运算去计算这些数值或找平均数、中位数等，都没有任何意义。</p>
-<p>所以标称属性值不具有有意义的序，且不是定量的。</p>
-<p>标称属性有一件有意义的事是——<strong>众数</strong>(mode)——一种中心趋势度量</p>
-<h3 id="2-1-3-二元属性"><a href="#2-1-3-二元属性" class="headerlink" title="2.1.3 二元属性"></a>2.1.3 二元属性</h3><p><strong>二元属性</strong>(binary attribute)是一种标称属性，只有两个状态（0或1）。</p>
-<p>0：通常表示属性不该出现；</p>
-<p>1：通常表示出现</p>
-<blockquote>
-<p>e.g.</p>
-<p><em>smoker</em>: 0表示不抽烟的患者，1表示抽烟的患者</p>
-</blockquote>
-<p>一个二元属性是<strong>对称的</strong>，即两种状态的结果具有同等价值且携带相同的权重。</p>
-<blockquote>
-<p>性别属性<em>gender</em>的男和女</p>
-</blockquote>
-<p>一个二元属性是<strong>非对称的</strong>，即两种状态的结果不是同样重要的。</p>
-<blockquote>
-<p>艾滋病(HIV)化验的结果，阳性和阴性。</p>
-</blockquote>
-<h3 id="2-1-4-序数属性"><a href="#2-1-4-序数属性" class="headerlink" title="2.1.4 序数属性"></a>2.1.4 序数属性</h3><p><strong>序数属性</strong>(ordinal attribute)，其可能的值之间具有有意义的序或秩评定(ranking)，但是相继值之间的差是未知的。</p>
-<blockquote>
-<p>e.g.</p>
-<p><em>drink_size</em> (饮料杯的大小): 小、中、大</p>
-<p><em>grade</em> (成绩): A+, A, A-, B+…</p>
-<p><em>professional_rank</em> (教师职位):助教、教师、副教授、教授</p>
-</blockquote>
-<p>以上的属性值都具有有意义的先后排序，但是我们不能说，“大” 比 “中” 大多少、“教授” 比 “副教授” 大多少？</p>
-<p>对主观的质量评估，不能客观的度量。因此，序数属性通常用于等级评定调查。</p>
-<p>序数属性的中心趋势可以用众数和中位数表示，但不能定义均值。</p>
-<blockquote>
-<p>Tag</p>
-<p>标称属性、二元属性、序数属性都是<strong>定性的</strong>，即，描述对象的特征，而不给出实际的大小或数量。</p>
-</blockquote>
-<h3 id="2-1-5-数值属性"><a href="#2-1-5-数值属性" class="headerlink" title="2.1.5 数值属性"></a>2.1.5 数值属性</h3><p><strong>数值属性</strong>(numeric attribute)是定量的，可以用整数或实数值表示。</p>
-<p>数值属性可以是<strong>区间标度</strong>或<strong>比率标度</strong>的。</p>
+<p>Pommerman是著名的Bomberman的变体。在每个游戏中，四个agents在随机绘制的对称11x11网格上战斗。四个agents位于四个角落。可以通过完全/部分可观察性进行游戏。在这个对称的11x11网格中，除了四个agents外，还有木墙和刚性墙。木墙可被炸弹炸毁，而刚性墙则坚不可摧且不可穿过。</p>
+<p><img src="https://user-images.githubusercontent.com/16803809/58882773-ea15d980-86d4-11e9-82f9-4b6820692dfb.gif" alt="Java-Pommerman"></p>
+<p><strong>游戏设置：</strong><br>每位agent每次放置炸弹，其炸弹数量都会减少一枚，炸弹爆炸后，炸弹数量也会增加一枚。每次炸弹爆炸都会影响其垂直和水平方向。炸弹放置10次后会爆炸。炸弹爆炸可摧毁其范围内的所有木墙，炸药，助推器或其他炸弹（取决于爆炸的强度）。木墙有隐藏的道具，当墙被破坏时会显示出来。这些隐藏的能量道具包括：额外的炸弹（将agents的弹药增加一倍），增加射程（将炸弹的爆炸力增加一倍）并可以踢（炸弹可以被agents踢出并直线移动）。</p>
+<p><strong>三种游戏结果类型：</strong></p>
 <ul>
-<li><p><strong>区间标度属性</strong></p>
-<p><strong>区间标度</strong>(interval_scaled)<strong>属性</strong>用相等的单位尺度度量。</p>
-<p>区间属性的值有序，可以是正、负、0。</p>
-<blockquote>
-<p>e.g.</p>
-<p>temperature*(摄氏、华氏温度)，可以计算温度差，但不能说谁是谁的倍数*</p>
-<p><em>date</em>(日历日期)，日历日期没有绝对的零点</p>
-</blockquote>
-</li>
-<li><p><strong>比率标度属性</strong></p>
-<p><strong>比率标度</strong>(ratio-scaled)<strong>属性</strong>是具有固有零点的数值属性，即可以说一个值是另一个值得倍数(或比率)。</p>
-<blockquote>
-<p>e.g.</p>
-<p>开氏温度(K)具有绝对零点</p>
-<p>工作年限</p>
-<p>字数</p>
-<p>重量、高度、货币量等等</p>
-</blockquote>
-</li>
+<li>Win：仅剩一个agent或一组agents。</li>
+<li>Tie：当游戏计时器结束时，多个agents或两个团队的agents在同一回合中存活或同时销毁。提示：如果在游戏中同时消灭了多个agents或两个团队的agents，我们将重新开始游戏，直到有获胜者或团队连续三场比赛Tie。在后一个结果中，两个团队都将被视为Loss。</li>
+<li>Loss：被摧毁的特工或团队。</li>
 </ul>
-<h3 id="2-1-6-离散属性、连续属性"><a href="#2-1-6-离散属性、连续属性" class="headerlink" title="2.1.6 离散属性、连续属性"></a>2.1.6 离散属性、连续属性</h3><p>机器学习领域的分类算法通常把属性分为<strong>离散的</strong>和<strong>连续的</strong>。</p>
+<p><strong>动作和观察：</strong><br>上、下、左、右、放置炸弹</p>
+<hr>
+<h3 id="配置-Java-Pommerman-游戏"><a href="#配置-Java-Pommerman-游戏" class="headerlink" title="配置 Java-Pommerman 游戏"></a>配置 Java-Pommerman 游戏</h3><blockquote>
+<p>详细框架介绍：<a target="_blank" rel="noopener" href="https://github.com/GAIGResearch/java-pommerman/wiki/Framework-Structure">https://github.com/GAIGResearch/java-pommerman/wiki/Framework-Structure</a></p>
+</blockquote>
+<p>为了安装并运行该框架，请按照以下说明进行操作：</p>
+<ol>
+<li>在Unix或Windows终端中使用<code>git clone</code>以下存储库：</li>
+</ol>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/GAIGResearch/java-pommerman</code></pre>
+<ol start="2">
+<li>设置您的IDE以使用该项目。 以下说明会指导您使用IntelliJ IDEA进行设置，但是您也可以使用任何其他您更喜欢的IDE。<ul>
+<li>打开IntelliJ IDEA</li>
+<li>选择<code>Create New Project</code>，然后选择<code>Java</code>，单击<code>Next</code>进行下一步。</li>
+<li>输入您喜欢的任何项目名称，然后选择“ java-pommerman”文件夹（即包含<code>src/directory</code>的那个文件夹）作为 project location。 点击<code>Finish</code>（如果出现提示，选择<code>yes</code>以覆盖项目文件夹）。</li>
+</ul>
+</li>
+<li>验证Pommerman可以在IDE中执行：<ul>
+<li>单击File → Project Structure，然后转到Libraries。</li>
+<li>点击<code>+</code>符号，然后选择Java。 <code>directory browsing</code>窗口应出现。</li>
+<li>选择目录<code>lib/</code>中的所有jar文件，然后单击<code>Open</code>。</li>
+<li>首先单击<code>OK</code>，将libraries添加到项目中，然后再次单击以关闭<code>Project Structure</code>窗口</li>
+<li>在IDE中，打开文件<code>src/Test.java</code></li>
+<li>运行<code>Test.java</code></li>
+<li>编译项目需要几秒钟，然后它将运行具有四个AI Agents的游戏。</li>
+</ul>
+</li>
+</ol>
+<h2 id="算法-介绍-伪代码"><a href="#算法-介绍-伪代码" class="headerlink" title="算法(介绍+伪代码)"></a>算法(介绍+伪代码)</h2><h3 id="Monte-Carlo-Tree-Search-algorithm-MCTS"><a href="#Monte-Carlo-Tree-Search-algorithm-MCTS" class="headerlink" title="Monte Carlo Tree Search algorithm (MCTS)"></a>Monte Carlo Tree Search algorithm (MCTS)</h3><p>蒙特卡洛树搜索（MCTS）是一种最佳优先搜索方法，该方法是在搜索开始时完全随机地进行搜索。 然后，使用先前探索的结果来更准确地预测最有前途的行动，从而使其评估更加精确。MCTS算法的核心循环可分为四个步骤，如图所示：</p>
+<p><img src="/img/MCTS.png" alt="MCTS算法"></p>
 <ul>
-<li><p><strong>离散属性</strong></p>
-<p>具有<strong>有限</strong>或<strong>无限可数</strong>数值。</p>
-<blockquote>
-<p>有限的：hair_color, drink_size</p>
-<p>无限可数的：customer_ID，即可以建立整数集合一一对应</p>
-</blockquote>
+<li><strong>Selection</strong>：在这一部分中，您需要确定应该扩展哪个节点。 此过程从树的根节点开始，一直进行到选择具有未扩展子节点的节点为止。 每当要从现有树中选择一个节点时（作用时），将选择使UCB1公式最大化的子节点：</li>
+</ul>
+<p>$$<br>UCB1= (X_j ) + C_p √((2 ln⁡n)/n_j )<br>$$</p>
+<p>在公式中，Xj是该节点下所有节点的平均奖励：Cp是一个探索常数（通常设置为1⁄√2）； n是访问父节点的次数； n_j是访问子节点j的次数。 值得注意的是，UCB1是最常用的action选择公式，但不是唯一可以使用的公式。</p>
+<ul>
+<li><p><strong>Expansion</strong>：当一个节点选择具有未发泡的孩子 - 也就是这个节点表示的状态，它的存在可以采取，但还没有尝试过的动作 - 这些子节点之一将扩展选择，这意味着模拟 从该状态开始完成。 选择要扩展的子项时，将随机执行所选的操作。</p>
 </li>
-<li><p><strong>连续属性</strong></p>
-<p>如果属性不是离散的，就是连续的。</p>
+<li><p><strong>Simulation</strong>：扩展节点后，将从刚刚扩展的非终端状态开始模拟，并且模拟将持续到游戏结束以生成估计值。 通常，这将随机执行，直到游戏获胜或失败为止。 游戏结束时的状态将用作此模拟的奖励，并将传播到搜索树。</p>
+</li>
+<li><p><strong>Backpropagation</strong>：将此奖励添加到新节点的总奖励Χ中。 奖励还将“备份”到其父节点（父节点的父节点），直到树的root。</p>
 </li>
 </ul>
-<h2 id="2-2-数据的基本统计描述"><a href="#2-2-数据的基本统计描述" class="headerlink" title="2.2 数据的基本统计描述"></a>2.2 数据的基本统计描述</h2><h3 id="2-2-1-中心趋势度量：均值、中位数、众数"><a href="#2-2-1-中心趋势度量：均值、中位数、众数" class="headerlink" title="2.2.1 中心趋势度量：均值、中位数、众数"></a>2.2.1 中心趋势度量：均值、中位数、众数</h3><ul>
-<li><p><strong>均值</strong>(mean)，还有一种丢弃高低极值的均值叫<strong>截尾均值</strong>(trimmed mean)</p>
-</li>
-<li><p><strong>中位数</strong>(median)</p>
-</li>
-<li><p><strong>众数</strong>(mode)，可分为<strong>单峰的</strong>(unimodal)，<strong>双峰的</strong>(bimodal)，<strong>三峰的</strong>(trimodal)，<strong>多峰的</strong>(multimodal)</p>
-</li>
-<li><p><strong>中列数</strong>(midrange)，是数据集的最大值和最小值的平均值</p>
-</li>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function msctsSearch()
+    while within time limit do
+        v ← treePolicy()
+        delta ← rollOut()
+        backUp(v, delta)
+    end while
+
+function mostVisitedAction()
+    return the most visited action
+
+function treePolicy()
+    while state is nontermimal do
+    if state not fully expanded then
+        return expand(state)
+    else
+        uct(state) # default tree policy
+
+function rollOut()
+    while rollOut not finished then
+        depth ← depth + 1
+    return root state heuristic
+
+function backUp(node, result)
+    visits ← visits + 1
+    totalValue ← totalValue + result</code></pre>
+<h3 id="UCT-algorithm"><a href="#UCT-algorithm" class="headerlink" title="UCT algorithm"></a>UCT algorithm</h3><p>根据子节点的总得分，访问次数和Agent的得分，计算出该节点的得分，然后选择得分最高的节点并返回。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function UCT()
+    for children nodes do
+        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
+        uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
+
+    # break ties randomly
+
+    roll(state, actions)
+
+    return node with the max value</code></pre>
+<h3 id="Bayesian-UCT-algorithm"><a href="#Bayesian-UCT-algorithm" class="headerlink" title="Bayesian UCT algorithm"></a>Bayesian UCT algorithm</h3><p>UCT值的计算被central-limit theory的原理所取代(<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1203.3519">Tesauro, Rajan and Segal, 2012</a>)。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function Bayesian UCT()
+    for children nodes do
+        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
+        uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
+                   * standard_deviation
+
+    roll(state, actions)
+
+    return node with the max value</code></pre>
+<h3 id="UCB1-tuned-algorithm"><a href="#UCB1-tuned-algorithm" class="headerlink" title="UCB1-tuned algorithm"></a>UCB1-tuned algorithm</h3><p>UCT函数结合了方差和特定节点的访问(<a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1023/A:1013689704352">Auer, Cesa-Bianchi and Fischer, 2002</a>)。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function UCB1-tuned()
+    for children nodes do
+        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
+        v<-variance+sqrt(2*Ln(parentVisitTimes+1)/(childVisitTimes+ϵ))
+        v<- min(v,1/4)
+        uctValue ← childValue + sqrt(v*Ln (parentVisitTimes+1)/(childVisitTimes+ϵ))
+
+    roll(state, actions)
+
+    return node with the max value</code></pre>
+<h3 id="Single-player-MCTS-algorithm"><a href="#Single-player-MCTS-algorithm" class="headerlink" title="Single-player MCTS algorithm"></a>Single-player MCTS algorithm</h3><p>添加了UCB公式的第三部分，其中包含方差和访问时间，这与UCB1- tunned算法的相似。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function SP_MCTS()
+    constant D
+    for children nodes do
+        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
+        uctValue ← childValue + sqrt(2*Ln (parentVisitTimes+1)/(childVisitTimes+ϵ)) 
+                   + sqrt(variance+D/(childVisitTimes+ϵ))
+
+    roll(state, actions)
+
+    return node with the max value</code></pre>
+<h3 id="AMAF-algorithm"><a href="#AMAF-algorithm" class="headerlink" title="AMAF algorithm"></a>AMAF algorithm</h3><p>基本AMAF算法在每次play-out后将UCT与AMAF更新结合在一起。 该算法可快速增加UCT树中节点的计数，从而提高算法对获胜率的confidence(<a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.183.7924&rep=rep1&type=pdf">Helmbold and Parker-Wood, 2009</a>)。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function AMAF()
+    for children nodes do
+        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
+        uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
+
+        AMAFchildValue ← normalize(AMAFTotalValue/(AMAFVisitTimes+ϵ))
+        AMAFValue ← AMAFchildValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
+
+    return node with the max value</code></pre>
+<h3 id="α-AMAF-algorithm"><a href="#α-AMAF-algorithm" class="headerlink" title="α - AMAF algorithm"></a>α - AMAF algorithm</h3><p>α-AMAF算法在每个节点上混合两组计数。 一种是标准更新，另一种是AMAF更新(<a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.183.7924&rep=rep1&type=pdf">Helmbold and Parker-Wood, 2009</a>)。 score的计算公式如下：<br>$$<br>αA+(1-α)U<br>$$<br>其中A是AMAF分数，U是UCT分数，α是[0,1]范围内的加权参数。 在上述公式中，α= 0表示标准UCT算法，α= 1表示基本AMAF算法。当α= 0.1-0.3时，可以将α-AMAF算法最优化，经过测试，在这里，我们将α设置为0.15。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function a_AMAF()
+    for children nodes do
+        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
+        uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
+
+        AMAFchildValue ← normalize(AMAFTotalValue/(AMAFVisitTimes+ϵ))
+        AMAFValue ← AMAFchildValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
+
+        alphaAMAFValue ← (alpha*AMAFValue)+((1 - alpha)*uctValue)
+
+    return node with the max value</code></pre>
+<h3 id="Cutoff-AMAF-algorithm"><a href="#Cutoff-AMAF-algorithm" class="headerlink" title="Cutoff AMAF algorithm"></a>Cutoff AMAF algorithm</h3><p>Cutoff AMAF用于“warm-up(预热)”树中的计数，然后使用精确的标准更新(UCT)去完善估算值(<a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.183.7924&rep=rep1&type=pdf">Helmbold and Parker-Wood, 2009</a>)。 定义参数k， 当迭代次数小于k时，将使用AMAF算法更新数据；当迭代次数大于k时，将使用UCT算法。当k = 0时，即标准UCT算法。 为了使Cutoff AMAF算法可以得到最大程度的优化，在这里，我们将cutoff的值设置为150。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function cutoff_AMAF()
+    if n < times times then # times=150
+        AMAF()
+    else
+        uct()</code></pre>
+<h3 id="ε-greedy-algorithm"><a href="#ε-greedy-algorithm" class="headerlink" title="ε - greedy algorithm"></a>ε - greedy algorithm</h3><p>epsilon-Greedy算法是Multiarmed Bandit Algorithms(MBA)之一。 为了解决“Explore-Exploit”难题，有必要使收益最大化。 ε-贪心算法会添加一个参数ε，该参数代表执行“Explore”的可能性。 例如，ε= 0.1，表示执行“ Explore”操作的可能性为10％，而“ Exploit”操作的概率为90％，这意味着当前最好的手臂摇动。 换句话说，如果以次数（即每10次操作）来计数投币机的机械臂摆动过程，则只有一个操作可以探索（尝试其他机械臂）。</p>
+<p>这里，我们的agent将具有较小的ε（= 1e-6）概率来随机选择未知action，然后具有1-ε的概率来选择现有actions中具有最大价值的action。 </p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function e_Greedy()
+    if ϵ*N finished then
+        for ϵ * Visit times do
+        select a random action
+        return node with the max value
+    else
+        for (1-ϵ) * Visit times do
+            childValue ← childTotalValue/(childVisitTimes+ϵ)
+            e_GreedyValue ← childValue + (1/(childVisitTimes+ϵ+1)) * (SumChildValue/NumChildValue - childValue)
+
+return node with the max value</code></pre>
+<h3 id="Decaying-ε-greedy-algorithm"><a href="#Decaying-ε-greedy-algorithm" class="headerlink" title="Decaying ε - greedy algorithm"></a>Decaying ε - greedy algorithm</h3><p>考虑到在传统的ε - greedy algorithm中，将epsilon设置为较低的固定值时，获得的解不一定是最优解。 由于Q学习初期的贪婪率可能太高，因此很容易输入局部最优解。 因此，我们尝试了“衰减的Epsilon-Greedy”策略，并使每一次roll的epsilon都是衰减的。</p>
+<p>Decaying ε - greedy algorithm和ε - greedy algorithm之间的区别在于，Decaying ε - greedy algorithm使用衰减的epsilon值来权衡开发和勘探。 此策略是使每次迭代的epsilon值都接近于0。 随着AI agents对环境的了解越来越多，利用率也随之提高，导致Q值几乎没有变化。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function e_Greedy_Decay()
+    if ϵ*N finished then
+        for ϵ * Visit times do
+            select a random action
+            decaying ϵ ← ϵ/100000
+        return node with the max value
+    else
+        for (1-ϵ) * Visit times do
+            childValue ← childTotalValue/(childVisitTimes+ϵ)
+            e_GreedyValue ← childValue + (1/(childVisitTimes+ϵ+1)) * (SumChildValue/NumChildValue - childValue)
+            decaying ϵ ← ϵ/100000
+
+return node with the max value</code></pre>
+<h3 id="First-Play-Urgency-algorithm-FPU"><a href="#First-Play-Urgency-algorithm-FPU" class="headerlink" title="First Play Urgency algorithm (FPU)"></a>First Play Urgency algorithm (FPU)</h3><p>根据<a target="_blank" rel="noopener" href="https://hal.archives-ouvertes.fr/hal-00115330/">Gelly(2006)</a>的研究，当迭代数与选择的动作数相比不够大时，常规的UCT方法可能效率较低。 如果某个动作每次都返回极高的值（在我们的环境中为+1），那么过多关注其他探索方法是不明智的。 因此，实施FPU方法是为了更好地利用潜在的有希望的行动。</p>
+<p>FPU的扩展方法被集成到UCT函数中，其中每个未扩展节点的等效uct值等于FPU值（FPU的参数）。 如果未扩展的节点被认为具有等效的uct值，则扩展该节点并将其作为树策略输出。 其他部分与UCT方法相似。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function FPU()
+    pre-defined parameter:FPU-value
+    for children nodes do
+        if the node is not expanded
+          uctValue<-FPU-value
+        else
+          childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
+          uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
+
+    if node with the max uctValue is not expanded
+        expand the node
+
+    roll(state, actions)
+
+    return node with the max value</code></pre>
+<h3 id="Progressive-Bias-algorithm"><a href="#Progressive-Bias-algorithm" class="headerlink" title="Progressive Bias algorithm"></a>Progressive Bias algorithm</h3><p>Progressive Bias是MCTS和基于域的启发式方法的组合，将包含基于域的启发式方法的第三个term添加到UCT公式中。 由于迭代次数太有限，因此启发式方法可以获取更多的信息(<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/6145622?casa_token=9T6wycv58SYAAAAA:89qE1ulJUV_7JyL5w2I8TZFDfAKPZH-n5wH8fXvhQhsTL4vnZA9Ugl5-p-6miWsAUoVlYeey-g">Browne，2012</a>)。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function ProgressiveMCTS()
+    for children nodes do
+        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
+        uctValue ← childValue + sqrt(2*Ln (parentVisitTimes+1)/(childVisitTimes+ϵ)) + child_heuristic/(childVisitTimes+1)
+
+    roll(state, actions)
+
+    return node with the max value</code></pre>
+<h3 id="Minimax-algorithm"><a href="#Minimax-algorithm" class="headerlink" title="Minimax algorithm"></a>Minimax algorithm</h3><p>Minimax是博弈论中的决策规则，并且已被证明在对抗回合制游戏中非常有效(<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1208.1940">Ontañón, 2012</a>)。 它旨在降低最坏情况发生时的损失，它是基于这样的假设，即对手会尝试使您进入最坏情况。 考虑到对手将您的奖励降到最低，Minimax的目的是找到最佳（最大价值）策略。</p>
+<p>在我们的minimax实现中，每个节点都有2个临时值，一个包含节点中生成的所有分数中的最小值，另一个包含子节点中所有值的最大值。 节点的最终值定义为2个临时值中的最小值。 </p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function minimax(node, result)
+    the node has 2 temp-values:v1,v2
+    if the result is generated in this node
+        v1=min(v1,result)
+    else # the result is propagated from children node
+        v2=max(children.value for all not-null children)
+    value=min(v1,v2)
+    #the “value” has the same function as TotalValue/visit in normal backup method </code></pre>
+<h3 id="Weighted-backup-algorithm"><a href="#Weighted-backup-algorithm" class="headerlink" title="Weighted backup algorithm"></a>Weighted backup algorithm</h3><p>根据<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/5369603?casa_token=HUgRambJDhAAAAAA:oWACdZP71a9AwXpOURL_Jc-puKh1nE5CFLhVJvb0AcdvtrzNnC2ZRhYSIAQyVrK08sPELnAn6g">Xie 和 Liu (2009)</a>的观点，有时使用平均分作为某种方法的评估并不是最佳选择，应该认为某些分数比其他分数更重要。Xie指出，在multi-arm bandit问题中，由于其准确性更高，因此应考虑后期模拟更为重要。</p>
+<p>由于与游戏的所有不同情况相比，迭代次数太少，因此minimax方法可能无法达到预期的效率，因此将加权后备方法实现为minimax与平均得分后备方法之间的平衡。根据minimax的原理，关于备份方法，我们有2个假设：</p>
+<ul>
+<li>如果在同一节点上生成了2个不同的分数（终止或达到最大深度），则在FFA模式下，较低值的分数应被视为更重要，因为对手特工更可能使您处于更糟的境地。就团队模式而言，这要视情况而定，因为您的队友将更有可能使您处于更好的状况。</li>
+<li>如果将2个不同的分数反向传播到同一节点，则具有较高价值的分数应被视为更重要，因为代理将尝试选择有前途的行动，而不是不良的行动。</li>
 </ul>
-<h3 id="2-2-2-度量数据散布：极差、四分位数、方差、标准差、四分位数极差"><a href="#2-2-2-度量数据散布：极差、四分位数、方差、标准差、四分位数极差" class="headerlink" title="2.2.2 度量数据散布：极差、四分位数、方差、标准差、四分位数极差"></a>2.2.2 度量数据散布：极差、四分位数、方差、标准差、四分位数极差</h3>
+<p>因此，我们假设满足上述两个假设的适当加权方法将改善MCTS的性能。</p>
+<pre class=" language-pseudocode"><code class="language-pseudocode">function backUp(node, result)
+    weight w is determined by result and 
+        whether the result is generated or back-propagated
+    visit <- visit + w*result
+    totalValue <- totalValue+w*result</code></pre>
+
             </div>
             <hr/>
 
@@ -612,7 +769,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://JianxiangGao.github.io/2020/09/28/shu-ju-wa-jue-di-er-zhang-shu-ju/">http://JianxiangGao.github.io/2020/09/28/shu-ju-wa-jue-di-er-zhang-shu-ju/</a>
+                    <a href="http://JianxiangGao.github.io/2021/01/05/you-hua-pommerman-yi/">http://JianxiangGao.github.io/2021/01/05/you-hua-pommerman-yi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -650,8 +807,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Data-Mining/">
-                                    <span class="chip bg-color">Data Mining</span>
+                                <a href="/tags/AI/">
+                                    <span class="chip bg-color">AI</span>
+                                </a>
+                            
+                                <a href="/tags/Monte-Carlo-tree-search/">
+                                    <span class="chip bg-color">Monte Carlo tree search</span>
                                 </a>
                             
                         </div>
@@ -823,31 +984,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/10/06/ji-qi-xue-xi-xian-xing-hui-gui/">
+                <a href="/2021/01/06/you-hua-pommerman-er/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="机器学习——线性回归">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="基于MCTS算法的Pommerman游戏AI代理的优化(二)">
                         
-                        <span class="card-title">机器学习——线性回归</span>
+                        <span class="card-title">基于MCTS算法的Pommerman游戏AI代理的优化(二)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是线性回归；拟合曲线；误差；似然函数；评估方法；
+                            
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-06
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-06
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Machine-Learning/" class="post-category">
-                                    Machine Learning
+                            <a href="/categories/AI/" class="post-category">
+                                    AI
                                 </a>
                             
                             
@@ -857,8 +1018,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Machine-Learning/">
-                        <span class="chip bg-color">Machine Learning</span>
+                    <a href="/tags/AI/">
+                        <span class="chip bg-color">AI</span>
+                    </a>
+                    
+                    <a href="/tags/Monte-Carlo-tree-search/">
+                        <span class="chip bg-color">Monte Carlo tree search</span>
                     </a>
                     
                 </div>
@@ -872,31 +1037,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/09/26/shu-ju-wa-jue-di-yi-zhang-dao-lun/">
+                <a href="/2020/12/07/shi-shi-xuan-ran-ji-zhu-de-fen-xi-bao-gao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="数据挖掘(第一章) 导论">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="实时渲染技术的分析报告">
                         
-                        <span class="card-title">数据挖掘(第一章) 导论</span>
+                        <span class="card-title">实时渲染技术的分析报告</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是数据挖掘；数据挖掘的重要性；数据科学的基本概念；主要数据挖掘任务；数据挖掘的开放挑战；
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Data-Mining/" class="post-category">
-                                    Data Mining
+                            <a href="/categories/Games-develpment/" class="post-category">
+                                    Games develpment
                                 </a>
                             
                             
@@ -906,8 +1071,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Data-Mining/">
-                        <span class="chip bg-color">Data Mining</span>
+                    <a href="/tags/Games-develpment/">
+                        <span class="chip bg-color">Games develpment</span>
+                    </a>
+                    
+                    <a href="/tags/Real-time-Rendering/">
+                        <span class="chip bg-color">Real-time Rendering</span>
                     </a>
                     
                 </div>

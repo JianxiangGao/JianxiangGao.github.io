@@ -545,14 +545,14 @@
 <p><strong>Note</strong>: RandomPlayer的胜率为0，因此可看作EnhancedPlayer与MCTSPlayer的对战</p>
 </li>
 </ul>
-<p><img src="https://github.com/JianxiangGao/JianxiangGao.github.io/blob/master/img/Full_FFA.png" alt="Tree policy comparison (Full-Observability &amp; FFA)"></p>
+<p><img src="/img/Full_FFA.png"></p>
 <h3 id="2-Full-Observability-amp-TEAM-mode-的对比分析"><a href="#2-Full-Observability-amp-TEAM-mode-的对比分析" class="headerlink" title="2. Full-Observability &amp; TEAM mode 的对比分析"></a>2. Full-Observability &amp; TEAM mode 的对比分析</h3><p><strong>运行设置</strong>：</p>
 <ul>
 <li>TEAM mode</li>
 <li>Full-Observability</li>
 <li>4个player: 2个EnhancedPlayers <strong>vs</strong> 2个MCTSPlayers</li>
 </ul>
-<p><img src="https://github.com/JianxiangGao/JianxiangGao.github.io/blob/master/img/Full_TEAM.png" alt="Tree policy comparison (Full-Observability &amp; TEAM)"></p>
+<p><img src="/img/Full_TEAM.png"></p>
 <h3 id="3-Partial-Observability-amp-FFA-mode-的对比分析"><a href="#3-Partial-Observability-amp-FFA-mode-的对比分析" class="headerlink" title="3. Partial-Observability &amp; FFA mode 的对比分析"></a>3. Partial-Observability &amp; FFA mode 的对比分析</h3><p><strong>运行设置</strong>：</p>
 <ul>
 <li><p>FFA mode</p>
@@ -567,14 +567,14 @@
 <p><strong>Note</strong>: RandomPlayer的胜率为0，因此可看作EnhancedPlayer与MCTSPlayer的对战</p>
 </li>
 </ul>
-<p><img src="https://github.com/JianxiangGao/JianxiangGao.github.io/blob/master/img/Partial_FFA.png" alt="Tree policy comparison (Partial-Observability &amp; FFA)"></p>
+<p><img src="/img/Partial_FFA.png"></p>
 <h3 id="4-Partial-Observability-amp-TEAM-mode-的对比分析"><a href="#4-Partial-Observability-amp-TEAM-mode-的对比分析" class="headerlink" title="4. Partial-Observability &amp; TEAM mode 的对比分析"></a>4. Partial-Observability &amp; TEAM mode 的对比分析</h3><p><strong>运行设置</strong>：</p>
 <ul>
 <li>TEAM mode</li>
 <li>Partial-Observability</li>
 <li>4个player: 2个EnhancedPlayers <strong>vs</strong> 2个MCTSPlayers</li>
 </ul>
-<p><img src="https://github.com/JianxiangGao/JianxiangGao.github.io/blob/master/img/Partial_TEAM.png" alt="Tree policy comparison (Partial-Observability &amp; TEAM)"></p>
+<p><img src="/img/Partial_TEAM.png"></p>
 <h2 id="数据分析与讨论"><a href="#数据分析与讨论" class="headerlink" title="数据分析与讨论"></a>数据分析与讨论</h2><p>通过以上实验数据，我们可以看到，在Full-Observability模式下，α-AMAF和Cutoff AMAF算法大大提高了UCT蒙特卡洛方法的强度。但是，ε-greedy和Decaying ε-greedy算法的效果不佳。这可能是因为ε-greedy算法收敛后，总是会选择概率为ε的非最优解，而最优解的发现机率很高，造成了很多浪费。</p>
 <p>在我们的实验中，采用Progressive Bias方法的agent从没有比原始的MCTS方法好，最可能的原因是来自最后一次MCTS搜索的启发式方法不足以支持MCTS。 </p>
 <p>Bayesian UCT agent通常比原始MCTS表现更好，似乎这种基于差异的树策略更有意义。Full-Observability模式下，weighted-backup和FPU方法显示出与原始MCTS相比的优势。但是，从部分可观察性的角度来看，其优势被大大削弱，这表明weighted-backup和FPU方法无法解决信息不完善的问题。此外，当rollout-policy和启发式方法更可靠时，weighted-backup方法也很有意义。</p>

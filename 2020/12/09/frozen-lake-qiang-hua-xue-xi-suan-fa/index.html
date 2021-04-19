@@ -394,7 +394,7 @@
                 <p>在本此项目中，您将学习如何实现各种强化学习算法，以解决frozen lake环境的策略问题。 </p>
 <p>共分为2个博客，本次先和我一起coding，下一部分我们将对实验结果进行深入分析。</p>
 <h3 id="Tools："><a href="#Tools：" class="headerlink" title="Tools："></a>Tools：</h3><p>PyCharm（python 3.8）</p>
-<h2 id="1-环境"><a href="#1-环境" class="headerlink" title="1. 环境"></a>1. 环境</h2><p>frozen lake环境有两个主要变体：small frozen lake (Fig. 1)和big frozen lake (Fig. 2)。 </p>
+<h2 id="1-环境"><a href="#1-环境" class="headerlink" title="1. 环境"></a>1. 环境</h2><p>frozen lake环境有两个主要变体：small frozen lake (上图)和big frozen lake (下图)。 </p>
 <p>在这两种情况下，正方形网格中的每个图块都对应一个状态。 还有一个额外的“吸收状态“ (absorbing state)，这个一会介绍。 </p>
 <p>共有四种类型的图块 (tile)：</p>
 <ul>
@@ -404,8 +404,8 @@
 <li>goal (白色)</li>
 </ul>
 <p>该agent具有四个action，分别对应于向上，向左，向下或向右移动一格。 但是，概率为0.1时，环境会忽略所需的方向，并且agent会滑动（即，向随机方向移动一格）。 导致agent移动到网格外部的动作将使状态保持不变。</p>
-<p>![Fig.1 small frozen lake](/img/small frozen lake.png)</p>
-<p>![Fig.2 big frozen lake](/img/big frozen lake.png)</p>
+<p><img src="/img/%E5%B0%8F%E5%86%B0%E5%86%BB%E6%B9%96.png" alt="small frozen lake"></p>
+<p><img src="/img/%E5%A4%A7%E5%86%B0%E5%86%BB%E6%B9%96.png" alt="big frozen lake"></p>
 <p>agent对目标采取行动后将获得+1奖励。 在其他所有情况下，agent都将获得零奖励。 请注意，agent进入目标不会获得奖励（掉进hole里也不会获得负数奖励）。 在对goal或hole采取行动后，agent会进入“吸收状态“ (absorbing state)。 在吸收状态下采取的每个动作都会导致吸收状态，这也不会提供奖励。 假设discount系数为γ= 0.9。</p>
 <p>出于model-free强化学习（或interactive testing）的目的，agent可以与frozen lake互动一定数量的time steps，该time steps等于图块 (tile)的数量。<br>OK，首先，我们的任务是实现frozen lake的environment：</p>
 <h3 id="class-EnvironmentModel"><a href="#class-EnvironmentModel" class="headerlink" title="class EnvironmentModel"></a>class EnvironmentModel</h3><p><code>class EnvironmentModel</code>表示环境的模型。此类的<code>constructor</code>接收多个states，多个actions以及一个控制伪随机数生成器的seed。它的子类必须实现两个方法：<code>p</code>和<code>r</code>。</p>

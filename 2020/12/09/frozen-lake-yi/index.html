@@ -362,7 +362,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-04-19
+                    2021-04-20
                 </div>
                 
 
@@ -404,8 +404,7 @@
 <li>goal (白色)</li>
 </ul>
 <p>该agent具有四个action，分别对应于向上，向左，向下或向右移动一格。 但是，概率为0.1时，环境会忽略所需的方向，并且agent会滑动（即，向随机方向移动一格）。 导致agent移动到网格外部的动作将使状态保持不变。</p>
-<p><img src="/img/%E5%B0%8F%E5%86%B0%E5%86%BB%E6%B9%96.png" alt="small frozen lake"></p>
-<p><img src="/img/%E5%A4%A7%E5%86%B0%E5%86%BB%E6%B9%96.png" alt="big frozen lake"></p>
+<p><img src="/img/%E5%86%B0%E5%86%BB%E6%B9%96.png"></p>
 <p>agent对目标采取行动后将获得+1奖励。 在其他所有情况下，agent都将获得零奖励。 请注意，agent进入目标不会获得奖励（掉进hole里也不会获得负数奖励）。 在对goal或hole采取行动后，agent会进入“吸收状态“ (absorbing state)。 在吸收状态下采取的每个动作都会导致吸收状态，这也不会提供奖励。 假设discount系数为γ= 0.9。</p>
 <p>出于model-free强化学习（或interactive testing）的目的，agent可以与frozen lake互动一定数量的time steps，该time steps等于图块 (tile)的数量。<br>OK，首先，我们的任务是实现frozen lake的environment：</p>
 <h3 id="class-EnvironmentModel"><a href="#class-EnvironmentModel" class="headerlink" title="class EnvironmentModel"></a>class EnvironmentModel</h3><p><code>class EnvironmentModel</code>表示环境的模型。此类的<code>constructor</code>接收多个states，多个actions以及一个控制伪随机数生成器的seed。它的子类必须实现两个方法：<code>p</code>和<code>r</code>。</p>
@@ -1770,7 +1769,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">18.3k</span>&nbsp;字
+                class="white-color">18.6k</span>&nbsp;字
             
             
             

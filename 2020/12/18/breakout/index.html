@@ -1,0 +1,1603 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="深度Q学习- Breakout游戏, Mr. Gao&#39;s Blog Bistro">
+    <meta name="description" content="内卷中......">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>深度Q学习- Breakout游戏 | Mr. Gao&#39;s Blog Bistro</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Mr. Gao&#39;s Blog Bistro</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Mr. Gao&#39;s Blog Bistro</div>
+        <div class="logo-desc">
+            
+            内卷中......
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">深度Q学习- Breakout游戏</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+        background-color: rgb(255, 255, 255,0.7);
+        border-radius: 10px;
+        box-shadow: 0 10px 35px 2px rgba(0, 0, 0, .15), 0 5px 15px rgba(0, 0, 0, .07), 0 2px 5px -5px rgba(0, 0, 0, .1) !important;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/AI/">
+                                <span class="chip bg-color">AI</span>
+                            </a>
+                        
+                            <a href="/tags/Deep-Q-Network/">
+                                <span class="chip bg-color">Deep Q-Network</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/AI/" class="post-category">
+                                AI
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-12-18
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-04-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    14 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>本次，我们将一起训练一个<strong>Deep Q-Network</strong>去玩Atari Breakout游戏。</p>
+<p>Atari开发并发布的游戏<strong>Breakout</strong>，也就是我们所说的《打砖块》游戏。</p>
+<img src="https://raw.githubusercontent.com/gsurma/atari/master/assets/Breakout/ddqn/breakout.gif" alt="Atari Breakout" style="zoom: 33%;" />
+
+<h2 id="1-环境安装"><a href="#1-环境安装" class="headerlink" title="1. 环境安装"></a>1. 环境安装</h2><p>我们这次将使用<strong>Google Colab</strong>在Google自带的GPU上训练Deep Q-Network。 如果你不熟悉<strong>Google Colab</strong>，请仔细阅读下面步骤。 </p>
+<ul>
+<li><p>首先，你需要注册一个Google帐户。</p>
+</li>
+<li><p>在Google Colab上，文件→新建笔记本。 代码执行程序→更改运行时类型，选择GPU作为硬件加速器，然后选择保存。 之后，你将有权使用Google的GPU。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>：这里提醒一下，Google的GPU对每个人的用量有限制，每次限制之后你的账号有24小时冷却时间，而且我们这次做的项目运行时间非常长，Google Colab虚拟机会在12小时后die，因此所有未保存到Google Drive的内容都会丢失，并且如果你电脑长时间不动，Google会默认你超时并限制你。别问我咋知道，说了都是泪（T_T）。</p>
+<p>解决办法：要么你呆在电脑前面时不时动一下鼠标，要不然就写个小脚本让你鼠标每几分钟点击一下屏幕。当然了，你也可以用你自己的GPU，主要是我穷（T_T）。</p>
+</blockquote>
+<ul>
+<li>安装<strong>OpenAI baselines</strong>。 在新的代码单元中，键入<code>!pip install baselines</code>，并执行该单元。 您可以忽略与<code>mujoco-py</code>相关的错误，因为我们不会使用<code>MuJoCo</code>。</li>
+</ul>
+<pre class=" language-python"><code class="language-python">`!pip install baselines`</code></pre>
+<ul>
+<li>安装<strong>Google Drive</strong>(即Google云端硬盘)，以便你可以从笔记本中访问它。 这可以通过执行以下代码单元并根据需要启用访问来实现。</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># Mounting a Google Drive</span>
+<span class="token keyword">from</span> google<span class="token punctuation">.</span>colab <span class="token keyword">import</span> drive
+drive<span class="token punctuation">.</span>mount<span class="token punctuation">(</span><span class="token string">'/content/drive'</span><span class="token punctuation">)</span></code></pre>
+<h2 id="2-原-Baseline-实现"><a href="#2-原-Baseline-实现" class="headerlink" title="2. (原)Baseline 实现"></a>2. (原)Baseline 实现</h2><p>我们的baseline实现是基于Github上的一个源码，如下：</p>
+<blockquote>
+<p>原baseline实现源码：<a target="_blank" rel="noopener" href="https://github.com/keras-team/keras-io/blob/master/examples/rl/deep_q_network_breakout.py">https://github.com/keras-team/keras-io/blob/master/examples/rl/deep_q_network_breakout.py</a></p>
+</blockquote>
+<p>不过他们的方法效率比较低下，甚至有的地方还有点错误，当然，你还是可以运行它们，但是如上文我所说，Colab虚拟机在12小时后就die了，超时后我们的训练模型就无法存在Google Drive上，因此我们后续会对此做出改进以提升效率。</p>
+<p>OK，我们先去上处链接，copy整个源码，作为原baseline实现，下一节我们对它进行改进。</p>
+<ul>
+<li><p>原baseline实现使用<strong>OpenAI Gym</strong>来创建Atari Breakout环境。 如果你不熟悉<strong>OpenAI Gym</strong>，请阅读此介绍(<a target="_blank" rel="noopener" href="http://gym.openai.com/docs/)%E3%80%82">http://gym.openai.com/docs/)。</a> 你应该熟悉主要的OpenAI Gym环境方法，例如<code>reset</code>和<code>step</code>。</p>
+</li>
+<li><p>原baseline实现还使用了多个<strong>Gym wrappers</strong>来转换原始的Atari Breakout环境。你可以在此处(<a target="_blank" rel="noopener" href="https://github.com/openai/baselines/blob/master/baselines/common/atari_wrappers.py)%E6%89%BE%E5%88%B0%E6%9C%89%E5%85%B3**Atari">https://github.com/openai/baselines/blob/master/baselines/common/atari_wrappers.py)找到有关**Atari</a> wrappers**的更多信息。</p>
+</li>
+<li><p>原baseline实现还基于<strong>Keras</strong>，这是一个基于TensorFlow的用于人工神经网络的开源Python库。 </p>
+</li>
+</ul>
+<h2 id="3-改进原baseline实现"><a href="#3-改进原baseline实现" class="headerlink" title="3. 改进原baseline实现"></a>3. 改进原baseline实现</h2><ul>
+<li><p>原baseline实现使用名为<strong>Adam</strong>的优化器。 因此，我们的第一个任务是用调用<code>tf.keras.optimizers.RMSprop</code>创建的优化器替换由调用<code>keras.optimizers.Adam</code>创建的优化器。 我们使用<code>learning rate=0.0001</code>和<code>discounting factor(rho)=0.99</code>。</p>
+</li>
+<li><p>原baseline实现变量<code>epsilon random frames</code>来控制在采取贪婪操作之前应观察多少帧（状态）。 我们消除此变量，并将其从出现的条件测试(conditional test)中删除。</p>
+</li>
+<li><p>原baseline实现的<code>replay buffer</code>大小为100000，这将导致Google Colab出现内存问题。 所以我们将<code>replay buffer</code>的大小减小到10000。</p>
+</li>
+<li><p>原baseline实现将一直训练Deep Q-Network，直到在最后100个<code>episodes</code>中获得的平均<code>return</code>超过40。这将花费比虚拟机的最大生存期更长的时间。 所以，我们更改最外面的while循环，以便在观察到2000000 frames（状态）后中断训练。</p>
+</li>
+<li><p>原baseline实现仅在<code>replay buffer</code>大小大于<code>batch</code>大小之后，才绘制一个<code>batch</code>并每四个frames更新一次Deep Q-Network。 我们改为仅当<code>replay buffer</code>已满后，才绘制<code>batch</code>并每四个frames更新一次Deep Q-Network。</p>
+</li>
+<li><p>原baseline实现将最后100个<code>episodes</code>的<code>return</code>存储在称为<code>episode_reward_history</code>的列表中。 相反，我们应该改为存储每个<code>episode</code>的<code>return</code>。 变量<code>running_reward</code>仍应仅包含最后100个<code>episodes</code>的平均<code>return</code>。</p>
+</li>
+<li><p>原baseline实现错误地为<code>batch</code>中的每个<code>state</code>计算了<code>one-step return</code>。 尽管此实现适用于Atari Breakout，但不适用于其他的许多Atari游戏。 所以，我们在baseline实现中用下面所示的单个分配替换两个分配。</p>
+</li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 原Baseline实现</span>
+updated_q_values <span class="token operator">=</span> rewards_sample <span class="token operator">+</span> gamma <span class="token operator">*</span> tf<span class="token punctuation">.</span>reduce_max<span class="token punctuation">(</span>
+    future_rewards<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span>
+<span class="token punctuation">)</span>
+updated_q_values <span class="token operator">=</span> updated_q_values <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> done_sample<span class="token punctuation">)</span> <span class="token operator">-</span> done_sample
+
+<span class="token comment" spellcheck="true"># 正确的实现</span>
+updated_q_values <span class="token operator">=</span> rewards_sample <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> done_sample<span class="token punctuation">)</span><span class="token operator">*</span>gamma<span class="token operator">*</span>tf<span class="token punctuation">.</span>reduce_max<span class="token punctuation">(</span>
+    future_rewards<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span>
+<span class="token punctuation">)</span></code></pre>
+<ul>
+<li>在training loop下一步，我们应该使用Keras将模型（卷积神经网络）保存到Google Drive文件夹（例如，<code>/content/drive/MyDrive/breakout/model</code>）。 我们还应该使用<code>NumPy</code>保存列表<code>episode reward history</code>，其中包含每个<code>training episode</code>的<code>return</code>。</li>
+</ul>
+<p>OK，下面是我们完整的改进后的代码：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> baselines<span class="token punctuation">.</span>common<span class="token punctuation">.</span>atari_wrappers <span class="token keyword">import</span> make_atari<span class="token punctuation">,</span> wrap_deepmind
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+<span class="token keyword">from</span> tensorflow <span class="token keyword">import</span> keras
+<span class="token keyword">from</span> tensorflow<span class="token punctuation">.</span>keras <span class="token keyword">import</span> layers
+
+<span class="token comment" spellcheck="true"># Configuration paramaters for the whole setup</span>
+seed <span class="token operator">=</span> <span class="token number">42</span>
+gamma <span class="token operator">=</span> <span class="token number">0.99</span>  <span class="token comment" spellcheck="true"># Discount factor for past rewards</span>
+epsilon <span class="token operator">=</span> <span class="token number">1.0</span>  <span class="token comment" spellcheck="true"># Epsilon greedy parameter</span>
+epsilon_min <span class="token operator">=</span> <span class="token number">0.1</span>  <span class="token comment" spellcheck="true"># Minimum epsilon greedy parameter</span>
+epsilon_max <span class="token operator">=</span> <span class="token number">1.0</span>  <span class="token comment" spellcheck="true"># Maximum epsilon greedy parameter</span>
+epsilon_interval <span class="token operator">=</span> <span class="token punctuation">(</span>
+    epsilon_max <span class="token operator">-</span> epsilon_min
+<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># Rate at which to reduce chance of random action being taken</span>
+batch_size <span class="token operator">=</span> <span class="token number">32</span>  <span class="token comment" spellcheck="true"># Size of batch taken from replay buffer</span>
+max_steps_per_episode <span class="token operator">=</span> <span class="token number">10000</span>
+
+<span class="token comment" spellcheck="true"># Use the Baseline Atari environment because of Deepmind helper functions</span>
+env <span class="token operator">=</span> make_atari<span class="token punctuation">(</span><span class="token string">"BreakoutNoFrameskip-v4"</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># Warp the frames, grey scale, stake four frame and scale to smaller ratio</span>
+env <span class="token operator">=</span> wrap_deepmind<span class="token punctuation">(</span>env<span class="token punctuation">,</span> frame_stack<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> scale<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+env<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">"""
+## Implement the Deep Q-Network
+
+This network learns an approximation of the Q-table, which is a mapping between
+the states and actions that an agent will take. For every state we'll have four
+actions, that can be taken. The environment provides the state, and the action
+is chosen by selecting the larger of the four Q-values predicted in the output layer.
+
+"""</span>
+
+num_actions <span class="token operator">=</span> <span class="token number">4</span>
+
+
+<span class="token keyword">def</span> <span class="token function">create_q_model</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># Network defined by the Deepmind paper</span>
+    inputs <span class="token operator">=</span> layers<span class="token punctuation">.</span>Input<span class="token punctuation">(</span>shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">84</span><span class="token punctuation">,</span> <span class="token number">84</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># Convolutions on the frames on the screen</span>
+    layer1 <span class="token operator">=</span> layers<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> strides<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> activation<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span><span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
+    layer2 <span class="token operator">=</span> layers<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> strides<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> activation<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span><span class="token punctuation">(</span>layer1<span class="token punctuation">)</span>
+    layer3 <span class="token operator">=</span> layers<span class="token punctuation">.</span>Conv2D<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> strides<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> activation<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span><span class="token punctuation">(</span>layer2<span class="token punctuation">)</span>
+
+    layer4 <span class="token operator">=</span> layers<span class="token punctuation">.</span>Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>layer3<span class="token punctuation">)</span>
+
+    layer5 <span class="token operator">=</span> layers<span class="token punctuation">.</span>Dense<span class="token punctuation">(</span><span class="token number">512</span><span class="token punctuation">,</span> activation<span class="token operator">=</span><span class="token string">"relu"</span><span class="token punctuation">)</span><span class="token punctuation">(</span>layer4<span class="token punctuation">)</span>
+    action <span class="token operator">=</span> layers<span class="token punctuation">.</span>Dense<span class="token punctuation">(</span>num_actions<span class="token punctuation">,</span> activation<span class="token operator">=</span><span class="token string">"linear"</span><span class="token punctuation">)</span><span class="token punctuation">(</span>layer5<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> keras<span class="token punctuation">.</span>Model<span class="token punctuation">(</span>inputs<span class="token operator">=</span>inputs<span class="token punctuation">,</span> outputs<span class="token operator">=</span>action<span class="token punctuation">)</span>
+
+
+<span class="token comment" spellcheck="true"># The first model makes the predictions for Q-values which are used to</span>
+<span class="token comment" spellcheck="true"># make a action.</span>
+model <span class="token operator">=</span> create_q_model<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># Build a target model for the prediction of future rewards.</span>
+<span class="token comment" spellcheck="true"># The weights of a target model get updated every 10000 steps thus when the</span>
+<span class="token comment" spellcheck="true"># loss between the Q-values is calculated the target Q-value is stable.</span>
+model_target <span class="token operator">=</span> create_q_model<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token triple-quoted-string string">"""
+## Train
+"""</span>
+<span class="token comment" spellcheck="true"># In the Deepmind paper they use RMSProp however then Adam optimizer</span>
+<span class="token comment" spellcheck="true"># improves training time</span>
+optimizer <span class="token operator">=</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>optimizers<span class="token punctuation">.</span>RMSprop<span class="token punctuation">(</span>learning_rate<span class="token operator">=</span><span class="token number">0.0001</span><span class="token punctuation">,</span> rho<span class="token operator">=</span><span class="token number">0.99</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># Experience replay buffers</span>
+action_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+state_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+state_next_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+rewards_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+done_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+episode_reward_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+running_reward <span class="token operator">=</span> <span class="token number">0</span>
+episode_count <span class="token operator">=</span> <span class="token number">0</span>
+frame_count <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token comment" spellcheck="true"># Number of frames to take random action and observe output</span>
+
+<span class="token comment" spellcheck="true"># Number of frames for exploration</span>
+epsilon_greedy_frames <span class="token operator">=</span> <span class="token number">1000000.0</span>
+<span class="token comment" spellcheck="true"># Maximum replay length</span>
+<span class="token comment" spellcheck="true"># Note: The Deepmind paper suggests 1000000 however this causes memory issues</span>
+max_memory_length <span class="token operator">=</span> <span class="token number">10000</span>
+<span class="token comment" spellcheck="true"># Train the model after 4 actions</span>
+update_after_actions <span class="token operator">=</span> <span class="token number">4</span>
+<span class="token comment" spellcheck="true"># How often to update the target network</span>
+update_target_network <span class="token operator">=</span> <span class="token number">10000</span>
+<span class="token comment" spellcheck="true"># Using huber loss for stability</span>
+loss_function <span class="token operator">=</span> keras<span class="token punctuation">.</span>losses<span class="token punctuation">.</span>Huber<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># Run until solved</span>
+    state <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>env<span class="token punctuation">.</span>reset<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    episode_reward <span class="token operator">=</span> <span class="token number">0</span>
+
+    <span class="token keyword">for</span> timestep <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> max_steps_per_episode<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># env.render(); Adding this line would show the attempts</span>
+        <span class="token comment" spellcheck="true"># of the agent in a pop up window.</span>
+        frame_count <span class="token operator">+=</span> <span class="token number">1</span>
+
+        <span class="token comment" spellcheck="true"># Use epsilon-greedy for exploration</span>
+        <span class="token keyword">if</span> epsilon <span class="token operator">></span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># Take random action</span>
+            action <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>num_actions<span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># Predict action Q-values</span>
+            <span class="token comment" spellcheck="true"># From environment state</span>
+            state_tensor <span class="token operator">=</span> tf<span class="token punctuation">.</span>convert_to_tensor<span class="token punctuation">(</span>state<span class="token punctuation">)</span>
+            state_tensor <span class="token operator">=</span> tf<span class="token punctuation">.</span>expand_dims<span class="token punctuation">(</span>state_tensor<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            action_probs <span class="token operator">=</span> model<span class="token punctuation">(</span>state_tensor<span class="token punctuation">,</span> training<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># Take best action</span>
+            action <span class="token operator">=</span> tf<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>action_probs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># Decay probability of taking random action</span>
+        epsilon <span class="token operator">-=</span> epsilon_interval <span class="token operator">/</span> epsilon_greedy_frames
+        epsilon <span class="token operator">=</span> max<span class="token punctuation">(</span>epsilon<span class="token punctuation">,</span> epsilon_min<span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># Apply the sampled action in our environment</span>
+        state_next<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> done<span class="token punctuation">,</span> _ <span class="token operator">=</span> env<span class="token punctuation">.</span>step<span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+        state_next <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>state_next<span class="token punctuation">)</span>
+
+        episode_reward <span class="token operator">+=</span> reward
+
+        <span class="token comment" spellcheck="true"># Save actions and states in replay buffer</span>
+        action_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+        state_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span>state<span class="token punctuation">)</span>
+        state_next_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span>state_next<span class="token punctuation">)</span>
+        done_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span>done<span class="token punctuation">)</span>
+        rewards_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span>reward<span class="token punctuation">)</span>
+        state <span class="token operator">=</span> state_next
+
+        <span class="token comment" spellcheck="true"># Update every fourth frame and once batch size is over 32</span>
+        <span class="token keyword">if</span> frame_count <span class="token operator">%</span> update_after_actions <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">:</span>
+
+            <span class="token comment" spellcheck="true"># Get indices of samples for replay buffers</span>
+            indices <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>done_history<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> size<span class="token operator">=</span>batch_size<span class="token punctuation">)</span>
+
+            <span class="token comment" spellcheck="true"># Using list comprehension to sample from replay buffer</span>
+            state_sample <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>state_history<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> indices<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            state_next_sample <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>state_next_history<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> indices<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            rewards_sample <span class="token operator">=</span> <span class="token punctuation">[</span>rewards_history<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> indices<span class="token punctuation">]</span>
+            action_sample <span class="token operator">=</span> <span class="token punctuation">[</span>action_history<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> indices<span class="token punctuation">]</span>
+            done_sample <span class="token operator">=</span> tf<span class="token punctuation">.</span>convert_to_tensor<span class="token punctuation">(</span>
+                <span class="token punctuation">[</span>float<span class="token punctuation">(</span>done_history<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> indices<span class="token punctuation">]</span>
+            <span class="token punctuation">)</span>
+
+            <span class="token comment" spellcheck="true"># Build the updated Q-values for the sampled future states</span>
+            <span class="token comment" spellcheck="true"># Use the target model for stability</span>
+            future_rewards <span class="token operator">=</span> model_target<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>state_next_sample<span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># Q value = reward + discount factor * expected future reward</span>
+            updated_q_values <span class="token operator">=</span> rewards_sample <span class="token operator">+</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token operator">-</span> done_sample <span class="token punctuation">)</span><span class="token operator">*</span>gamma<span class="token operator">*</span>tf<span class="token punctuation">.</span>reduce_max<span class="token punctuation">(</span>
+                future_rewards<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span>
+            <span class="token punctuation">)</span>
+
+            <span class="token comment" spellcheck="true"># If final frame set the last value to -1</span>
+
+            <span class="token comment" spellcheck="true"># Create a mask so we only calculate loss on the updated Q-values</span>
+            masks <span class="token operator">=</span> tf<span class="token punctuation">.</span>one_hot<span class="token punctuation">(</span>action_sample<span class="token punctuation">,</span> num_actions<span class="token punctuation">)</span>
+
+            <span class="token keyword">with</span> tf<span class="token punctuation">.</span>GradientTape<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> tape<span class="token punctuation">:</span>
+                <span class="token comment" spellcheck="true"># Train the model on the states and updated Q-values</span>
+                q_values <span class="token operator">=</span> model<span class="token punctuation">(</span>state_sample<span class="token punctuation">)</span>
+
+                <span class="token comment" spellcheck="true"># Apply the masks to the Q-values to get the Q-value for action taken</span>
+                q_action <span class="token operator">=</span> tf<span class="token punctuation">.</span>reduce_sum<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>multiply<span class="token punctuation">(</span>q_values<span class="token punctuation">,</span> masks<span class="token punctuation">)</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token comment" spellcheck="true"># Calculate loss between new Q-value and old Q-value</span>
+                loss <span class="token operator">=</span> loss_function<span class="token punctuation">(</span>updated_q_values<span class="token punctuation">,</span> q_action<span class="token punctuation">)</span>
+
+            <span class="token comment" spellcheck="true"># Backpropagation</span>
+            grads <span class="token operator">=</span> tape<span class="token punctuation">.</span>gradient<span class="token punctuation">(</span>loss<span class="token punctuation">,</span> model<span class="token punctuation">.</span>trainable_variables<span class="token punctuation">)</span>
+            optimizer<span class="token punctuation">.</span>apply_gradients<span class="token punctuation">(</span>zip<span class="token punctuation">(</span>grads<span class="token punctuation">,</span> model<span class="token punctuation">.</span>trainable_variables<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> frame_count <span class="token operator">%</span> update_target_network <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># update the the target network with new weights</span>
+            model_target<span class="token punctuation">.</span>set_weights<span class="token punctuation">(</span>model<span class="token punctuation">.</span>get_weights<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token comment" spellcheck="true"># Log details</span>
+            template <span class="token operator">=</span> <span class="token string">"running reward: &amp;#123;:.2f&amp;#125; at episode &amp;#123;&amp;#125;, frame count &amp;#123;&amp;#125;"</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>template<span class="token punctuation">.</span>format<span class="token punctuation">(</span>running_reward<span class="token punctuation">,</span> episode_count<span class="token punctuation">,</span> frame_count<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># Limit the state and reward history</span>
+        <span class="token keyword">if</span> len<span class="token punctuation">(</span>rewards_history<span class="token punctuation">)</span> <span class="token operator">></span> max_memory_length<span class="token punctuation">:</span>
+            <span class="token keyword">del</span> rewards_history<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">del</span> state_history<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">del</span> state_next_history<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">del</span> action_history<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span>
+            <span class="token keyword">del</span> done_history<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+        <span class="token keyword">if</span> done<span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+
+    <span class="token comment" spellcheck="true"># Update running reward to check condition for solving</span>
+    episode_reward_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span>episode_reward<span class="token punctuation">)</span>
+
+    running_reward <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>episode_reward_history<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">100</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    episode_count <span class="token operator">+=</span> <span class="token number">1</span>
+
+    <span class="token keyword">if</span> running_reward <span class="token operator">></span> <span class="token number">40</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># Condition to consider the task solved</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Solved at episode &amp;#123;&amp;#125;!"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>episode_count<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+
+    <span class="token keyword">if</span> frame_count <span class="token operator">></span> <span class="token number">2000000</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true">#if frame_count > 20:</span>
+      <span class="token keyword">break</span>
+
+<span class="token comment" spellcheck="true"># 把训练好的模型保存在google drive上</span>
+model<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">'/content/drive/MyDrive/breakout/model'</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># numpy 存储</span>
+x <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>episode_reward_history<span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">'/content/drive/MyDrive/breakout/model/log.npy'</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">"""
+## Visualizations
+Before any training:
+![Imgur](https://i.imgur.com/rRxXF4H.gif)
+
+In early stages of training:
+![Imgur](https://i.imgur.com/X8ghdpL.gif)
+
+In later stages of training:
+![Imgur](https://i.imgur.com/Z1K6qBQ.gif)
+"""</span>
+</code></pre>
+<h2 id="4-训练"><a href="#4-训练" class="headerlink" title="4. 训练"></a>4. 训练</h2><p>接下来，训练我们的2000000 frames的Deep Q-Network。 这可能需要十多个小时。 最后100 <code>episodes</code>的平均<code>return</code>应该接近10。</p>
+<blockquote>
+<p><strong>Note</strong>：应该先通过仅对很少的frames进行Deep Q-Network训练来测试你的实现。 一旦你对自己的代码充满了信心后，就可以整夜训练你的Deep Q-Network啦！但是别忘了我最开始说的待机时间过长导致的限制问题。</p>
+</blockquote>
+<h2 id="5-测试"><a href="#5-测试" class="headerlink" title="5. 测试"></a>5. 测试</h2><p>为了测试我们训练后的Deep Q-Network，新建一个代码块。</p>
+<ul>
+<li><p>首先从我们的Google Drive加载经过训练的模型，接着，创建Atari Breakout环境，并使用与训练模型相同的<code>wrappers</code>。</p>
+</li>
+<li><p>我们需要使用<code>gym.wrappers.Monitor</code>来录制受过训练的agent与环境交互的视频。 </p>
+</li>
+<li><p>我们根据训练有素的Deep Q-Network使用greedy（而不是ε-greedy）策略记录互动的10个<code>episodes</code>。 </p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>：仅在调用<code>env.close</code>方法后，视频才会写入你的Google云端硬盘。</p>
+</blockquote>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> google<span class="token punctuation">.</span>colab <span class="token keyword">import</span> drive
+drive<span class="token punctuation">.</span>mount<span class="token punctuation">(</span><span class="token string">'/content/drive'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">from</span> baselines<span class="token punctuation">.</span>common<span class="token punctuation">.</span>atari_wrappers <span class="token keyword">import</span> make_atari<span class="token punctuation">,</span> wrap_deepmind
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+<span class="token keyword">from</span> tensorflow <span class="token keyword">import</span> keras
+<span class="token keyword">import</span> gym
+
+seed <span class="token operator">=</span> <span class="token number">42</span>
+
+model <span class="token operator">=</span> keras<span class="token punctuation">.</span>models<span class="token punctuation">.</span>load_model<span class="token punctuation">(</span><span class="token string">'/content/drive/MyDrive/breakout/model'</span><span class="token punctuation">)</span>
+
+env <span class="token operator">=</span> make_atari<span class="token punctuation">(</span><span class="token string">'BreakoutNoFrameskip-v4'</span><span class="token punctuation">)</span>
+env <span class="token operator">=</span> wrap_deepmind<span class="token punctuation">(</span>env<span class="token punctuation">,</span> frame_stack<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> scale<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+env<span class="token punctuation">.</span>seed<span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+
+env <span class="token operator">=</span> gym<span class="token punctuation">.</span>wrappers<span class="token punctuation">.</span>Monitor<span class="token punctuation">(</span>env<span class="token punctuation">,</span> <span class="token string">'/content/drive/MyDrive/breakout/videos'</span><span class="token punctuation">,</span>
+               video_callable<span class="token operator">=</span><span class="token keyword">lambda</span> episode_id<span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">,</span> force<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+n_episodes <span class="token operator">=</span> <span class="token number">10</span>
+returns <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+<span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span>n_episodes<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  ret <span class="token operator">=</span> <span class="token number">0</span>
+
+  state <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>env<span class="token punctuation">.</span>reset<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+  done <span class="token operator">=</span> <span class="token boolean">False</span>
+  <span class="token keyword">while</span> <span class="token operator">not</span> done<span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># Predict action Q-values</span>
+    <span class="token comment" spellcheck="true"># From environment state</span>
+    state_tensor <span class="token operator">=</span> tf<span class="token punctuation">.</span>convert_to_tensor<span class="token punctuation">(</span>state<span class="token punctuation">)</span>
+    state_tensor <span class="token operator">=</span> tf<span class="token punctuation">.</span>expand_dims<span class="token punctuation">(</span>state_tensor<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    action_probs <span class="token operator">=</span> model<span class="token punctuation">(</span>state_tensor<span class="token punctuation">,</span> training<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true"># Take best action</span>
+    action <span class="token operator">=</span> tf<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>action_probs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># Apply the sampled action in our environment</span>
+    state_next<span class="token punctuation">,</span> reward<span class="token punctuation">,</span> done<span class="token punctuation">,</span> _ <span class="token operator">=</span> env<span class="token punctuation">.</span>step<span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+    state_next <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>state_next<span class="token punctuation">)</span>
+
+    ret <span class="token operator">+=</span> reward
+
+    state <span class="token operator">=</span> state_next
+
+  returns<span class="token punctuation">.</span>append<span class="token punctuation">(</span>ret<span class="token punctuation">)</span>
+
+env<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Returns:_&amp;#123;&amp;#125;'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>returns<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<h2 id="6-思考"><a href="#6-思考" class="headerlink" title="6. 思考"></a>6. 思考</h2><ul>
+<li><strong>在训练期间，为什么有必要按照ε-greedy策略而不是greedy策略（就Q而言）采取行动？</strong></li>
+</ul>
+<p>使用ε-greedy策略意味着在训练中选择一个动作时，会将其选择为Q值最高的动作或随机动作。 两者之间的选择是随机且基于epsilon值的，并且在训练过程中对epsilon进行退火。 在训练开始时，将采取许多随机动作，但是随着训练的进行，将采取q值最大的许多动作。 因此，具有ε值的ε-greedy策略可以消除过度拟合（记忆随机状态转换）或拟合不足的负面影响。</p>
+<ul>
+<li>**为什么原baseline实现错误地为<code>batch</code>中的每个<code>state</code>计算了<code>one-step return</code>？ **</li>
+</ul>
+<p>Q矩阵的更新公式：<br>$$<br>Q(state) = R(state) + Gamma * Max[Q(next state)]<br>$$<br>更新的Q值将用于训练Q(state)模型，其中<code>done_sample</code>包含一个<code>done(boolean)</code>数组，该数组指示是否需要重置环境<code>env.reset</code>。 done可以为<code>True</code>或<code>False</code>，因此<code>done_sample</code>只能等于1或0。</p>
+<p>训练后，模型现在可以基于看不见的输入来预测输出。在模型上调用函数<code>model.predict()</code>时，模型将根据训练数据预测当前状态的奖励。</p>
+<p>为了将Q-function更新为当前奖励和预期未来奖励的总和，最后，将没有未来奖励，所以此状态的值是此时获得的奖励的总和。因此，Q值更新将分两个步骤完成，并且可能不会适用于许多其他Atari游戏。</p>
+<ul>
+<li><strong>绘制存储在列表<code>episode_reward_history</code>中的平均<code>returns</code>。</strong></li>
+</ul>
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#from google.colab import drive</span>
+<span class="token comment" spellcheck="true">#drive.mount('/content/drive')</span>
+
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+
+<span class="token comment" spellcheck="true">#episode_reward_history = np.load('/content/drive/MyDrive/ai_games_assignment3/model/log.npy')</span>
+episode_reward_history <span class="token operator">=</span> np<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">'/content/log.npy'</span><span class="token punctuation">)</span>
+
+moving_avg <span class="token operator">=</span> np<span class="token punctuation">.</span>convolve<span class="token punctuation">(</span>episode_reward_history<span class="token punctuation">,</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">100</span><span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'valid'</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token punctuation">[</span>i <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>moving_avg<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> moving_avg<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">"reward"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">"episode"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><img src="/img/%E5%B9%B3%E5%9D%87returns.png" alt="绘制结果"></p>
+<p>我们可以看到，最后100 <code>episodes</code>的平均<code>return</code>是接近10的。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">高健翔</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://JianxiangGao.github.io/2020/12/18/breakout/">http://JianxiangGao.github.io/2020/12/18/breakout/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">高健翔</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/AI/">
+                                    <span class="chip bg-color">AI</span>
+                                </a>
+                            
+                                <a href="/tags/Deep-Q-Network/">
+                                    <span class="chip bg-color">Deep Q-Network</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'GhAP9WOlxJNcpbzAAzfe3Ggp-MdYXbMMI',
+        appKey: 'MznyhQG0ddMnwgR47NQGkRio',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '快来交流吧'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/01/05/you-hua-pommerman-yi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="基于MCTS算法的Pommerman游戏AI代理的优化(一)">
+                        
+                        <span class="card-title">基于MCTS算法的Pommerman游戏AI代理的优化(一)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-05
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI/" class="post-category">
+                                    AI
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/AI/">
+                        <span class="chip bg-color">AI</span>
+                    </a>
+                    
+                    <a href="/tags/Monte-Carlo-tree-search/">
+                        <span class="chip bg-color">Monte Carlo tree search</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/12/10/frozen-lake-er/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="强化学习算法—Frozen Lake游戏(二)">
+                        
+                        <span class="card-title">强化学习算法—Frozen Lake游戏(二)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Reinforcement-learning/" class="post-category">
+                                    Reinforcement learning
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/AI/">
+                        <span class="chip bg-color">AI</span>
+                    </a>
+                    
+                    <a href="/tags/Reinforcement-learning/">
+                        <span class="chip bg-color">Reinforcement learning</span>
+                    </a>
+                    
+                    <a href="/tags/Sarsa/">
+                        <span class="chip bg-color">Sarsa</span>
+                    </a>
+                    
+                    <a href="/tags/Q-learning/">
+                        <span class="chip bg-color">Q-learning</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="2987193702"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='list'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">高健翔</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">23.7k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/JianxiangGao" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:675896948@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="https://www.facebook.com/jianxiang.gao.167/" class="tooltipped" target="_blank" data-tooltip="关注我的Facebook: https://www.facebook.com/jianxiang.gao.167/" data-position="top" data-delay="50">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

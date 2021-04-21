@@ -425,7 +425,7 @@ drive<span class="token punctuation">.</span>mount<span class="token punctuation
 <ul>
 <li><p>原baseline实现使用<strong>OpenAI Gym</strong>来创建Atari Breakout环境。 如果你不熟悉<strong>OpenAI Gym</strong>，请阅读此介绍(<a target="_blank" rel="noopener" href="http://gym.openai.com/docs/)%E3%80%82">http://gym.openai.com/docs/)。</a> 你应该熟悉主要的OpenAI Gym环境方法，例如<code>reset</code>和<code>step</code>。</p>
 </li>
-<li><p>原baseline实现还使用了多个<strong>Gym wrappers</strong>来转换原始的Atari Breakout环境。你可以在此处(<a target="_blank" rel="noopener" href="https://github.com/openai/baselines/blob/master/baselines/common/atari_wrappers.py)%E6%89%BE%E5%88%B0%E6%9C%89%E5%85%B3**Atari">https://github.com/openai/baselines/blob/master/baselines/common/atari_wrappers.py)找到有关**Atari</a> wrappers**的更多信息。</p>
+<li><p>原baseline实现还使用了多个<strong>Gym wrappers</strong>来转换原始的Atari Breakout环境。你可以在此处(<a target="_blank" rel="noopener" href="https://github.com/openai/baselines/blob/master/baselines/common/atari_wrappers.py">https://github.com/openai/baselines/blob/master/baselines/common/atari_wrappers.py</a>) 找到有关<strong>Atari wrappers</strong>的更多信息。</p>
 </li>
 <li><p>原baseline实现还基于<strong>Keras</strong>，这是一个基于TensorFlow的用于人工神经网络的开源Python库。 </p>
 </li>
@@ -687,7 +687,7 @@ In later stages of training:
 ![Imgur](https://i.imgur.com/Z1K6qBQ.gif)
 """</span>
 </code></pre>
-<h2 id="4-训练"><a href="#4-训练" class="headerlink" title="4. 训练"></a>4. 训练</h2><p>接下来，训练我们的2000000 frames的Deep Q-Network。 这可能需要十多个小时。 最后100 <code>episodes</code>的平均<code>return</code>应该接近10。</p>
+<h2 id="4-训练"><a href="#4-训练" class="headerlink" title="4. 训练"></a>4. 训练</h2><p>接下来，训练我们的2000000 frames的Deep Q-Network，这可能需要十多个小时。 最后100个<code>episodes</code>的平均<code>return</code>应该接近10。</p>
 <blockquote>
 <p><strong>Note</strong>：应该先通过仅对很少的frames进行Deep Q-Network训练来测试你的实现。 一旦你对自己的代码充满了信心后，就可以整夜训练你的Deep Q-Network啦！但是别忘了我最开始说的待机时间过长导致的限制问题。</p>
 </blockquote>
@@ -783,7 +783,7 @@ plt<span class="token punctuation">.</span>ylabel<span class="token punctuation"
 plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">"episode"</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <p><img src="/img/%E5%B9%B3%E5%9D%87returns.png" alt="绘制结果"></p>
-<p>我们可以看到，最后100 <code>episodes</code>的平均<code>return</code>是接近10的。</p>
+<p>我们可以看到，最后100个<code>episodes</code>的平均<code>return</code>是接近10的。</p>
 
             </div>
             <hr/>

@@ -435,7 +435,7 @@
 <li><p>代码中有一个名为<code>add_noise()</code>的函数，该函数会向一维<code>np.array</code>中的每个元素添加一个小的随机噪声，用于满足<strong>“break ties”</strong>的要求。 使用此功能后，相等values可能会有所不同，并且每个value都有相同的概率成为最大值，从而满足<strong>“在给定状态下最大化Q的动作之间随机break ties”</strong>的要求。</p>
 </li>
 <li><p>environment中的<strong>“slip”</strong>定义为在我们的环境中<strong>采取随机动作</strong>。 下表显示了当agent在环境边缘滑动时对<strong>“slip”</strong>的两种定义的表现 <strong>P(s’|s,a)</strong></p>
-<p><img src="https://raw.githubusercontent.com/JianxiangGao/JianxiangGao.github.io/master/img/slip.png"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E2%80%94Frozen%20Lake%E6%B8%B8%E6%88%8F/slip.png"></p>
 <p>当agent滑到我们环境的边缘时，它将采用前一个<strong>P(s’|s,a)**，其中有1/4的可能性</strong>“保持状态不变”**。</p>
 </li>
 </ul>
@@ -497,7 +497,7 @@
 <p><strong>Note</strong>：以上时间，是在我自己的计算机上使用PyCharm的运行时间，仅供参考。</p>
 <p>policy iteration需要更少的迭代才能找到最佳策略。 但是，就单次迭代的时间消耗而言，policy iteration算法比value iteration算法花费的时间要多得多，因为policy iteration的单次迭代中有{policy evaluation, policy improvement}，并且“policy evaluation”非常耗时。 因此，总体而言，value iteration更快。</p>
 <p>以下截图显示了policy iteration和value iteration算法的一些输出，其中“最佳策略所需的迭代”在顶部，而“时间消耗”（秒）在底部。</p>
-<p><img src="/img/%E4%B8%A4%E7%A7%8D%E8%BF%AD%E4%BB%A3.png"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E2%80%94Frozen%20Lake%E6%B8%B8%E6%88%8F/%E4%B8%A4%E7%A7%8D%E8%BF%AD%E4%BB%A3.png"></p>
 <h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><ul>
 <li><p>**Sarsa要为small frozen lake找到最佳策略需要多少episodes？ Q-learning需要多少episodes？ **</p>
 <p><strong>提示：可以使用policy evaluation将通过这些算法获得的每个策略的value与最佳策略的value进行比较</strong></p>
@@ -576,9 +576,9 @@
 <p>当<code>max_episodes = 2000</code>时，Sarsa更有可能以局部最优策略结束，并且无法在2000步内找到全局最优值，而Q-learning则不太可能停留在局部最优值上。 考虑到成功找到最优策略的情况，Sarsa平均进行了527次迭代，而Q-learning平均进行了972次迭代。</p>
 <p>结果表明，不同的动态<code>epsilons</code>和<code>etas</code>对学习过程有很大的影响。 另外，调整<code>epsilons</code>和<code>eta</code>是改善两种算法结果的一种可能方法。</p>
 <p>下图3-4显示了一些输出，其中使用Q-learning或sarsa的agent成功找到了在最大episodes中的small frozen lake的最优策略。图中的policy和value矩阵是agent刚刚实现最优策略时的policy和价value矩阵。</p>
-<p><img src="/img/sarsa%E5%92%8Cq%E6%88%90%E5%8A%9F.png"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E2%80%94Frozen%20Lake%E6%B8%B8%E6%88%8F/sarsa%E5%92%8Cq%E6%88%90%E5%8A%9F.png"></p>
 <p>下图5-6显示了使用Q-learning或sarsa的agent未能找到在最大episodes中的small frozen lake的最优策略。</p>
-<p><img src="/img/sarsa%E5%92%8Cq%E5%A4%B1%E8%B4%A5.png"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E2%80%94Frozen%20Lake%E6%B8%B8%E6%88%8F/sarsa%E5%92%8Cq%E5%A4%B1%E8%B4%A5.png"></p>
 <h2 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h2><ul>
 <li><strong>在线性action-value函数逼近中，当状态<code>s</code>和动作<code>a</code>的每个可能组合由不同的特征向量φ(s，a)表示，其中除1以外的所有元素均为0时，如何解释参数向量<code>θ</code>的每个元素？ 解释为什么实现的tabular model-free强化学习算法是您实现的non-tabular model-free强化学习算法的特例</strong></li>
 </ul>
@@ -589,12 +589,12 @@
 <li><strong>通过调整Sarsa和Q-learning控制的参数（maximum number of episodes, learning rate, and exploration factor），尝试为big frozen lake找到最佳策略。 必须使用policy evaluation来确认生成的策略是最佳的。 即使失败，也要描述自己的过程。</strong></li>
 </ul>
 <h3 id="1-Sarsa"><a href="#1-Sarsa" class="headerlink" title="1. Sarsa"></a>1. Sarsa</h3><p>设置了**超参数(hyper-parameter)**的Sarsa：{max_episodes = 80000，eta = 0.4，epsilon = 0.99}∪{policy evaluation per 200 episodes}用于big frozen lake的最佳策略。 运行约2天后，Sarsa未能找到最佳策略。图7-8显示了Sarsa在80000次episodes后发现的策略以及value_iteration生成的最佳策略以进行比较。图9-10显示了Sarsa发现的策略与最佳策略之间的差异的更多细节。</p>
-<p><img src="/img/%E5%9B%BE78.png"></p>
-<p><img src="/img/%E5%9B%BE910.png"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E2%80%94Frozen%20Lake%E6%B8%B8%E6%88%8F/%E5%9B%BE78.png"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E2%80%94Frozen%20Lake%E6%B8%B8%E6%88%8F/%E5%9B%BE910.png"></p>
 <p>根据上述实验，我们发现根据Sarsa的输出，无法找到states（从起点(0,0)开始的random actions和epsilon-greedy actions几乎不可能实现/覆盖它们）的最佳策略。 我认为该算法旨在从起点找到最优策略，而不是为每个状态都找到最优策略，因此处理从起点不可能实现的states的效率低下。 找到每个状态的最佳策略的一种可能方法是让agent从随机状态开始，而不是从起点唯一开始。</p>
 <h3 id="2-Q-learning"><a href="#2-Q-learning" class="headerlink" title="2. Q-learning"></a>2. Q-learning</h3><p>设置了**超参数(hyper-parameter)**的Q-learning：{max_episodes = 80000，eta = 0.4，epsilon = 0.99}∪{policy evaluation per 200 episodes}用于big frozen lake的最佳策略。图11-12显示了在80000次episodes后通过Q-learning发现的策略以及由value_iteration生成的最优策略进行比较。图13-14显示了有关通过Q-learning发现的策略与最优策略之间的差异的更多细节。</p>
-<p><img src="/img/%E5%9B%BE1112.png"></p>
-<p><img src="/img/%E5%9B%BE1314.png"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E2%80%94Frozen%20Lake%E6%B8%B8%E6%88%8F/%E5%9B%BE1112.png"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E2%80%94Frozen%20Lake%E6%B8%B8%E6%88%8F/%E5%9B%BE1314.png"></p>
 <p>根据Q-learning的结果，Q-learning还存在关于不太可能访问的state的policy问题，但问题似乎不比Sarsa严重。 与Sarsa相比，Q-learning与value iteration更相似。</p>
 <p>但是，对于经常访问的state（图的右上角），Q-learning也未能找到最佳策略，该状态具有两个具有相似Q(s,a)的动作，而相关的next_state的值比较（参见粉红色箭头） 与最优的相同。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>尽管可以将经常访问状态的Q-learning策略视为等于最佳策略（每个策略评估的<code>np.max(np.abs(value1-value2))&lt;2*theta</code> 都有误差：<strong>theta</strong>）， Q-learning的policy和value不相符，是一个问题。 但这不是由于我们的代码错误所致，因为<strong>状态的更新与相关状态的更新之间存在延迟</strong>。 这可能是由于random factor，以及学习率和epsilon的不合适所致。 可以通过调整学习率和epsilon或使用Q-softmax生成动作来解决。</p>
@@ -1290,7 +1290,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">23.7k</span>&nbsp;字
+                class="white-color">19.6k</span>&nbsp;字
             
             
             

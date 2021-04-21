@@ -362,7 +362,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-04-19
+                    2021-04-21
                 </div>
                 
 
@@ -421,7 +421,7 @@
 <p>详细规则：<a target="_blank" rel="noopener" href="https://github.com/GAIGResearch/java-pommerman/wiki/Pommerman-Game-Rules">https://github.com/GAIGResearch/java-pommerman/wiki/Pommerman-Game-Rules</a></p>
 </blockquote>
 <p>Pommerman是著名的Bomberman的变体。在每个游戏中，四个agents在随机绘制的对称11x11网格上战斗。四个agents位于四个角落。可以通过完全/部分可观察性进行游戏。在这个对称的11x11网格中，除了四个agents外，还有木墙和刚性墙。木墙可被炸弹炸毁，而刚性墙则坚不可摧且不可穿过。</p>
-<p><img src="https://user-images.githubusercontent.com/16803809/58882773-ea15d980-86d4-11e9-82f9-4b6820692dfb.gif" alt="Java-Pommerman"></p>
+<p><img src="https://github.com/JianxiangGao/hexo_blog_img/blob/master/%E5%9F%BA%E4%BA%8EMCTS%E7%AE%97%E6%B3%95%E7%9A%84Pommerman%E6%B8%B8%E6%88%8FAI%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E5%8C%96/Pommerman.gif?raw=true" alt="Java-Pommerman"></p>
 <p><strong>游戏设置：</strong><br>每位agent每次放置炸弹，其炸弹数量都会减少一枚，炸弹爆炸后，炸弹数量也会增加一枚。每次炸弹爆炸都会影响其垂直和水平方向。炸弹放置10次后会爆炸。炸弹爆炸可摧毁其范围内的所有木墙，炸药，助推器或其他炸弹（取决于爆炸的强度）。木墙有隐藏的道具，当墙被破坏时会显示出来。这些隐藏的能量道具包括：额外的炸弹（将agents的弹药增加一倍），增加射程（将炸弹的爆炸力增加一倍）并可以踢（炸弹可以被agents踢出并直线移动）。</p>
 <p><strong>三种游戏结果类型：</strong></p>
 <ul>
@@ -458,7 +458,7 @@
 </li>
 </ol>
 <h2 id="算法-介绍-伪代码"><a href="#算法-介绍-伪代码" class="headerlink" title="算法(介绍+伪代码)"></a>算法(介绍+伪代码)</h2><h3 id="Monte-Carlo-Tree-Search-algorithm-MCTS"><a href="#Monte-Carlo-Tree-Search-algorithm-MCTS" class="headerlink" title="Monte Carlo Tree Search algorithm (MCTS)"></a>Monte Carlo Tree Search algorithm (MCTS)</h3><p>蒙特卡洛树搜索（MCTS）是一种最佳优先搜索方法，该方法是在搜索开始时完全随机地进行搜索。 然后，使用先前探索的结果来更准确地预测最有前途的行动，从而使其评估更加精确。MCTS算法的核心循环可分为四个步骤，如图所示：</p>
-<p><img src="/img/MCTS.png" alt="MCTS算法"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EMCTS%E7%AE%97%E6%B3%95%E7%9A%84Pommerman%E6%B8%B8%E6%88%8FAI%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E5%8C%96/MCTS.png" alt="MCTS算法"></p>
 <ul>
 <li><strong>Selection</strong>：在这一部分中，您需要确定应该扩展哪个节点。 此过程从树的根节点开始，一直进行到选择具有未扩展子节点的节点为止。 每当要从现有树中选择一个节点时（作用时），将选择使UCB1公式最大化的子节点：</li>
 </ul>
@@ -1320,7 +1320,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">23.7k</span>&nbsp;字
+                class="white-color">19.6k</span>&nbsp;字
             
             
             

@@ -366,7 +366,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-04-17
+                    2021-04-21
                 </div>
                 
 
@@ -597,12 +597,12 @@ app<span class="token punctuation">.</span>secret_key <span class="token operato
     app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre>
 <h4 id="BM25模型"><a href="#BM25模型" class="headerlink" title="BM25模型"></a>BM25模型</h4><p>该模型是Elasticsearch默认使用的，因此我们直接利用<code>multi_match</code>去查询<code>query</code>。</p>
 <p>首先您需要了解BM25检索模型的打分方式，即对于所有documents的不同fields (即所有documents的title field、type field、director filed…)，分别进行打分得到一个分数，最后加在一起得到最后的query score (即BM25模型的最终分数)，下图可以方便您进行理解：</p>
-<p><img src="/img/BM25%E6%89%93%E5%88%86%E6%96%B9%E5%BC%8F.png" alt="BM25打分方式"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EElasticsearch%E7%9A%84%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/BM25%E6%89%93%E5%88%86%E6%96%B9%E5%BC%8F.png" alt="BM25打分方式"></p>
 <blockquote>
 <p>假如你只想制作一个简易的搜索引擎，那么你可以直接忽略BM25F模型相关的代码</p>
 </blockquote>
 <h4 id="BM25F模型"><a href="#BM25F模型" class="headerlink" title="BM25F模型"></a>BM25F模型</h4><p>BM25F检索模型具有不同的打分方式，即我们将所有fields合成一个field，如下图的BM25F View所示即为我们需要打分的filed，因为每个电影的简介(<code>movie_synopsis</code>)字数不同，所以我们添加一定数量的None，以确保<code>movie_synopsis</code>中都含有100个字(超出100字的我们就不管了，因为不是很多)，这样做可以保证最后打分的公平性。</p>
-<p><img src="/img/BM25F%E6%89%93%E5%88%86%E6%96%B9%E5%BC%8F.png" alt="BM25F打分方式"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EElasticsearch%E7%9A%84%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/BM25F%E6%89%93%E5%88%86%E6%96%B9%E5%BC%8F.png" alt="BM25F打分方式"></p>
 <hr>
 <p>对于我们的<code>SearchForm.py</code>文件：</p>
 <ul>
@@ -733,21 +733,21 @@ app<span class="token punctuation">.</span>secret_key <span class="token operato
 <h4 id="运行Python-Flask-Web应用程序："><a href="#运行Python-Flask-Web应用程序：" class="headerlink" title="运行Python Flask Web应用程序："></a>运行Python Flask Web应用程序：</h4><p>如果一切都按计划运行，则您应该能够运行您的<code>app.py</code>，它将在端口5000上侦听：</p>
 <pre class=" language-python"><code class="language-python">http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token punctuation">:</span><span class="token number">5000</span><span class="token operator">/</span></code></pre>
 <p>当您访问端口5000上的端点时，您应该能够看到电影搜索引擎的主页面，该页面应如下所示：</p>
-<p><img src="/img/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B8%BB%E9%A1%B5%E9%9D%A2.png" alt="搜索引擎主页面"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EElasticsearch%E7%9A%84%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B8%BB%E9%A1%B5%E9%9D%A2.png" alt="搜索引擎主页面"></p>
 <h4 id="BM25搜索"><a href="#BM25搜索" class="headerlink" title="BM25搜索"></a>BM25搜索</h4><p>输入任何<code>Keyword</code>，直接点击<code>BM25 Search</code>，可以得到下图所示结果：</p>
-<p><img src="/img/BM25%E6%90%9C%E7%B4%A2.png" alt="BM25搜索"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EElasticsearch%E7%9A%84%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/BM25%E6%90%9C%E7%B4%A2.png" alt="BM25搜索"></p>
 <h4 id="BM25F搜索"><a href="#BM25F搜索" class="headerlink" title="BM25F搜索"></a>BM25F搜索</h4><ul>
 <li>首先输入权重<code>Weight</code>，当<code>Weight=1</code>时，所有field的权重均相同且等于1，也可以设置一个特定field的权重(例：设置type权重为5，则其它fields默认为1)：</li>
 </ul>
-<p><img src="/img/%E8%AE%BE%E7%BD%AEtype%E6%9D%83%E9%87%8D%E4%B8%BA5.png" alt="设置type权重为5"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EElasticsearch%E7%9A%84%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/%E8%AE%BE%E7%BD%AEtype%E6%9D%83%E9%87%8D%E4%B8%BA5.png" alt="设置type权重为5"></p>
 <ul>
 <li>点击<code>Create Dataset</code>后，我们可以去Kibana的Index管理界面看到下图所示(查看的方法可参考上一个博客)，成功新建了一个<code>bm25_dataset</code>：</li>
 </ul>
-<p><img src="/img/Kibana%E6%96%B0dataset.png" alt="Kibana新dataset"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EElasticsearch%E7%9A%84%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/Kibana%E6%96%B0dataset.png" alt="Kibana新dataset"></p>
 <ul>
 <li>输入任何<code>Keyword</code>，直接点击<code>BM25F Search</code>，可以得到下图所示结果：</li>
 </ul>
-<p><img src="/img/BM25F%E6%90%9C%E7%B4%A2.png" alt="BM25F搜索"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EElasticsearch%E7%9A%84%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/BM25F%E6%90%9C%E7%B4%A2.png" alt="BM25F搜索"></p>
 <ul>
 <li><strong>注意</strong>：更换权重前，先点击<code>Clear Dataset</code>，然后再创建新的Dataset，否则dataset中的数据会叠加重复。</li>
 </ul>
@@ -1447,7 +1447,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">23.7k</span>&nbsp;字
+                class="white-color">19.6k</span>&nbsp;字
             
             
             

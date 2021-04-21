@@ -362,7 +362,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-04-17
+                    2021-04-21
                 </div>
                 
 
@@ -421,7 +421,7 @@
 <p><strong>3. Light source</strong></p>
 <p>To describe the light source in rendering, it is necessary to simplify the shape of the light source and the degree of light emission. Similar to the simulation of the scene, the shape of the light source can also be described by different types of geometric data, and the irradiance information at different positions of the light source is simplified to Part of similar material. At the same time, as the light spreads in the scene, any light-receiving object will also emit light after reflection and other effects, and the light source is regarded as a part of the scene.</p>
 <h4 id="2-1-2-Rasterization"><a href="#2-1-2-Rasterization" class="headerlink" title="2.1.2 Rasterization"></a>2.1.2 Rasterization</h4><p>Before the rasterization operation, it needs to go through two stages of primitive assembly and screen mapping to transform the object coordinates to window coordinates. Rasterization is a discretization process, that is, the process of converting 3D continuous objects into discrete screen pixels. Specifically, this process includes two stages: triangle assembly and triangle traversal. First, rasterization will determine the fragments covered by the primitives, use vertex attribute interpolation to obtain the attribute information of the fragments, and then send it to the fragment shader for colour calculation. The difference is that fragments are candidates for pixels, so only fragments that pass subsequent tests will become the final displayed pixels (Akenine-Möller, 2019).</p>
-<p><img src="/img/Rasterization.png" alt="Figure 1. Rasterization (Story, 2014)."></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%AE%9E%E6%97%B6%E6%B8%B2%E6%9F%93%E6%8A%80%E6%9C%AF%E7%9A%84%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A/Rasterization.png" alt="Figure 1. Rasterization (Story, 2014)."></p>
 <p>The development of GPU has a strong dependence on the development of rasterization. In order to optimize rasterization, most of the GPUs so far have used the SIMD architecture. Different data are calculated under the same instruction so that the GPU can perform rasterization and rendering calculations for each pixel or triangle at high speed in parallel. Although the research of real-time rendering based on rasterization is still developing rapidly, new algorithms and stronger GPUs will bring better pictures every year, but the real physical effects have not been completely solved, and the improvement of the picture has gradually encountered a bottleneck.</p>
 <h4 id="2-1-3-Ray-tracing"><a href="#2-1-3-Ray-tracing" class="headerlink" title="2.1.3 Ray tracing"></a>2.1.3 Ray tracing</h4><p>A powerful feature of ray tracing is that it can greatly facilitate the content creation process. One of the most direct ways is to directly implement offline light transfer simulation algorithms, such as Path Tracing, in a real-time rendering engine that has already used physical shading and lighting. Specifically, in the scene editor of the rendering engine, you can directly switch to the GPU Path Tracing rendering mode with one click, and it only takes a few seconds to get the most correct solution for the current lighting. This has greatly improved the process of creating scenes, editing materials and lighting in game development.</p>
 <p>Another big improvement is to use DXR to directly implement Light Map baking. Most of the existing engines have an external Light Map Baker, which uses completely different code and implementation from the renderer of the engine itself. The current workflow is often to export the scene from the engine, input it to the Light Map Baker, and then Baker outputs the calculated Light Map back. Because now ray tracing is officially added to the graphics API, it is very simple to directly implement the GPU-based Light Map Baker inside the engine. For example, the Light Map Baker that can be previewed in real-time in the engine editor is directly implemented in Unreal Engine 4. Because Path Tracer comes with all the resources and material shaders of the engine itself, with the ray-tracing API, both the cost of the lightmap process itself and the cost of developing Light Map rendering software have been greatly reduced. At the same time, the waiting time for calculation will be greatly shortened due to GPU acceleration (Keller, 2019).</p>
@@ -892,45 +892,50 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2020/10/06/ji-qi-xue-xi-xian-xing-hui-gui/">
+                <a href="/2020/12/07/shi-shi-xuan-ran-ji-zhu-de-fen-xi-bao-gao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="机器学习—线性回归">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="实时渲染技术的分析报告">
                         
-                        <span class="card-title">机器学习—线性回归</span>
+                        <span class="card-title">实时渲染技术的分析报告</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是线性回归；拟合曲线；误差；似然函数；评估方法；
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Machine-Learning/" class="post-category">
-                                    Machine Learning
+                            <a href="/categories/Games-develpment/" class="post-category">
+                                    Games develpment
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Machine-Learning/">
-                        <span class="chip bg-color">Machine Learning</span>
+                    <a href="/tags/Games-develpment/">
+                        <span class="chip bg-color">Games develpment</span>
+                    </a>
+                    
+                    <a href="/tags/Real-time-Rendering/">
+                        <span class="chip bg-color">Real-time Rendering</span>
                     </a>
                     
                 </div>
@@ -1137,7 +1142,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">23.7k</span>&nbsp;字
+                class="white-color">19.6k</span>&nbsp;字
             
             
             

@@ -370,7 +370,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-04-20
+                    2021-04-21
                 </div>
                 
 
@@ -435,7 +435,7 @@
 <li><p>代码中有一个名为<code>add_noise()</code>的函数，该函数会向一维<code>np.array</code>中的每个元素添加一个小的随机噪声，用于满足<strong>“break ties”</strong>的要求。 使用此功能后，相等values可能会有所不同，并且每个value都有相同的概率成为最大值，从而满足<strong>“在给定状态下最大化Q的动作之间随机break ties”</strong>的要求。</p>
 </li>
 <li><p>environment中的<strong>“slip”</strong>定义为在我们的环境中<strong>采取随机动作</strong>。 下表显示了当agent在环境边缘滑动时对<strong>“slip”</strong>的两种定义的表现 <strong>P(s’|s,a)</strong></p>
-<p><img src="/img/slip.png"></p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/JianxiangGao.github.io/master/img/slip.png"></p>
 <p>当agent滑到我们环境的边缘时，它将采用前一个<strong>P(s’|s,a)**，其中有1/4的可能性</strong>“保持状态不变”**。</p>
 </li>
 </ul>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="基于MCTS算法的Pommerman游戏AI代理的优化(一), Mr. Gao">
+    <meta name="keywords" content="关卡设计的10个技巧, Mr. Gao">
     <meta name="description" content="内卷中......">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>基于MCTS算法的Pommerman游戏AI代理的优化(一) | Mr. Gao</title>
+    <title>关卡设计的10个技巧 | Mr. Gao</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -201,12 +201,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EMCTS%E7%AE%97%E6%B3%95%E7%9A%84Pommerman%E6%B8%B8%E6%88%8FAI%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E5%8C%96/feature.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/feature.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">基于MCTS算法的Pommerman游戏AI代理的优化(一)</h1>
+                    <h1 class="description center-align post-title">关卡设计的10个技巧</h1>
                 </div>
             </div>
         </div>
@@ -326,12 +326,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/AI/">
-                                <span class="chip bg-color">AI</span>
-                            </a>
-                        
-                            <a href="/tags/Monte-Carlo-tree-search/">
-                                <span class="chip bg-color">Monte Carlo tree search</span>
+                            <a href="/tags/Level-Design/">
+                                <span class="chip bg-color">Level Design</span>
                             </a>
                         
                     </div>
@@ -342,8 +338,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE-AI/" class="post-category">
-                                项目-AI
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%90%91/" class="post-category">
+                                个人向
                             </a>
                         
                     </div>
@@ -355,28 +351,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-01-05
+                    2021-04-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-04-23
+                    2021-04-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    8 分
                 </div>
                 
 
@@ -391,259 +387,62 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本项目是由我与两位大佬(Peiyao Wang，Yuze Liu)共同完成，旨在通过阅读蒙特卡罗树搜索(MCTS)相关文献，在Pommerman游戏环境中，从不同方向来优化Pommerman的AI代理(agents)，并通过实验数据对比分析优劣。</p>
-<p><strong>我们的项目最后在Pommerman(FFA模式)比赛中，从众多AI Agents中脱颖而出，最后夺得第二名的好成绩，再次感谢这两位大佬做出的贡献。</strong></p>
-<blockquote>
-<p>项目源码：<a target="_blank" rel="noopener" href="https://github.com/JianxiangGao/Pommerman_MCTS_optimized_GroupAI">https://github.com/JianxiangGao/Pommerman_MCTS_optimized_GroupAI</a></p>
-<p>注意：此项目需要自行添加到java-Pommerman框架中运行，详细步骤可阅读README.md。</p>
-</blockquote>
-<p>我们优化的方向包括：</p>
-<ul>
-<li>8种基于基本UCT算法(Upper Confidence Bound Apply to Tree)对tree policy进行优化的算法，包括：<ul>
-<li>Bayesian UCT</li>
-<li>AMAF</li>
-<li>α-AMAF</li>
-<li>Cut-off AMAF</li>
-<li>ε-greedy</li>
-<li>Decaying ε-greedy</li>
-<li>First Play Urgency (FPU)</li>
-<li>Progressive Bias</li>
-</ul>
-</li>
-<li>2种反向传播优化方法<ul>
-<li>Minimax</li>
-<li>weighted-backup </li>
-</ul>
-</li>
-</ul>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="Pommerman游戏介绍"><a href="#Pommerman游戏介绍" class="headerlink" title="Pommerman游戏介绍"></a>Pommerman游戏介绍</h3><blockquote>
-<p>详细介绍：<a target="_blank" rel="noopener" href="https://github.com/GAIGResearch/java-pommerman/wiki">https://github.com/GAIGResearch/java-pommerman/wiki</a></p>
-<p>详细规则：<a target="_blank" rel="noopener" href="https://github.com/GAIGResearch/java-pommerman/wiki/Pommerman-Game-Rules">https://github.com/GAIGResearch/java-pommerman/wiki/Pommerman-Game-Rules</a></p>
-</blockquote>
-<p>Pommerman是著名的Bomberman的变体。在每个游戏中，四个agents在随机绘制的对称11x11网格上战斗。四个agents位于四个角落。可以通过完全/部分可观察性进行游戏。在这个对称的11x11网格中，除了四个agents外，还有木墙和刚性墙。木墙可被炸弹炸毁，而刚性墙则坚不可摧且不可穿过。</p>
-<p><img src="https://github.com/JianxiangGao/hexo_blog_img/blob/master/%E5%9F%BA%E4%BA%8EMCTS%E7%AE%97%E6%B3%95%E7%9A%84Pommerman%E6%B8%B8%E6%88%8FAI%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E5%8C%96/Pommerman.gif?raw=true" alt="Java-Pommerman"></p>
-<p><strong>游戏设置：</strong><br>每位agent每次放置炸弹，其炸弹数量都会减少一枚，炸弹爆炸后，炸弹数量也会增加一枚。每次炸弹爆炸都会影响其垂直和水平方向。炸弹放置10次后会爆炸。炸弹爆炸可摧毁其范围内的所有木墙，炸药，助推器或其他炸弹（取决于爆炸的强度）。木墙有隐藏的道具，当墙被破坏时会显示出来。这些隐藏的能量道具包括：额外的炸弹（将agents的弹药增加一倍），增加射程（将炸弹的爆炸力增加一倍）并可以踢（炸弹可以被agents踢出并直线移动）。</p>
-<p><strong>三种游戏结果类型：</strong></p>
-<ul>
-<li>Win：仅剩一个agent或一组agents。</li>
-<li>Tie：当游戏计时器结束时，多个agents或两个团队的agents在同一回合中存活或同时销毁。提示：如果在游戏中同时消灭了多个agents或两个团队的agents，我们将重新开始游戏，直到有获胜者或团队连续三场比赛Tie。在后一个结果中，两个团队都将被视为Loss。</li>
-<li>Loss：被摧毁的特工或团队。</li>
-</ul>
-<p><strong>动作和观察：</strong><br>上、下、左、右、放置炸弹</p>
-<hr>
-<h3 id="配置-Java-Pommerman-游戏"><a href="#配置-Java-Pommerman-游戏" class="headerlink" title="配置 Java-Pommerman 游戏"></a>配置 Java-Pommerman 游戏</h3><blockquote>
-<p>详细框架介绍：<a target="_blank" rel="noopener" href="https://github.com/GAIGResearch/java-pommerman/wiki/Framework-Structure">https://github.com/GAIGResearch/java-pommerman/wiki/Framework-Structure</a></p>
-</blockquote>
-<p>为了安装并运行该框架，请按照以下说明进行操作：</p>
-<ol>
-<li>在Unix或Windows终端中使用<code>git clone</code>以下存储库：</li>
-</ol>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/GAIGResearch/java-pommerman</code></pre>
-<ol start="2">
-<li>设置您的IDE以使用该项目。 以下说明会指导您使用IntelliJ IDEA进行设置，但是您也可以使用任何其他您更喜欢的IDE。<ul>
-<li>打开IntelliJ IDEA</li>
-<li>选择<code>Create New Project</code>，然后选择<code>Java</code>，单击<code>Next</code>进行下一步。</li>
-<li>输入您喜欢的任何项目名称，然后选择“ java-pommerman”文件夹（即包含<code>src/directory</code>的那个文件夹）作为 project location。 点击<code>Finish</code>（如果出现提示，选择<code>yes</code>以覆盖项目文件夹）。</li>
-</ul>
-</li>
-<li>验证Pommerman可以在IDE中执行：<ul>
-<li>单击File → Project Structure，然后转到Libraries。</li>
-<li>点击<code>+</code>符号，然后选择Java。 <code>directory browsing</code>窗口应出现。</li>
-<li>选择目录<code>lib/</code>中的所有jar文件，然后单击<code>Open</code>。</li>
-<li>首先单击<code>OK</code>，将libraries添加到项目中，然后再次单击以关闭<code>Project Structure</code>窗口</li>
-<li>在IDE中，打开文件<code>src/Test.java</code></li>
-<li>运行<code>Test.java</code></li>
-<li>编译项目需要几秒钟，然后它将运行具有四个AI Agents的游戏。</li>
-</ul>
-</li>
-</ol>
-<h2 id="算法-介绍-伪代码"><a href="#算法-介绍-伪代码" class="headerlink" title="算法(介绍+伪代码)"></a>算法(介绍+伪代码)</h2><h3 id="Monte-Carlo-Tree-Search-algorithm-MCTS"><a href="#Monte-Carlo-Tree-Search-algorithm-MCTS" class="headerlink" title="Monte Carlo Tree Search algorithm (MCTS)"></a>Monte Carlo Tree Search algorithm (MCTS)</h3><p>蒙特卡洛树搜索（MCTS）是一种最佳优先搜索方法，该方法是在搜索开始时完全随机地进行搜索。 然后，使用先前探索的结果来更准确地预测最有前途的行动，从而使其评估更加精确。MCTS算法的核心循环可分为四个步骤，如图所示：</p>
-<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EMCTS%E7%AE%97%E6%B3%95%E7%9A%84Pommerman%E6%B8%B8%E6%88%8FAI%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E5%8C%96/MCTS.png" alt="MCTS算法"></p>
-<ul>
-<li><strong>Selection</strong>：在这一部分中，您需要确定应该扩展哪个节点。 此过程从树的根节点开始，一直进行到选择具有未扩展子节点的节点为止。 每当要从现有树中选择一个节点时（作用时），将选择使UCB1公式最大化的子节点：</li>
-</ul>
-<p>$$<br>UCB1= (X_j ) + C_p √((2 ln⁡n)/n_j )<br>$$</p>
-<p>在公式中，Xj是该节点下所有节点的平均奖励：Cp是一个探索常数（通常设置为1⁄√2）； n是访问父节点的次数； n_j是访问子节点j的次数。 值得注意的是，UCB1是最常用的action选择公式，但不是唯一可以使用的公式。</p>
-<ul>
-<li><p><strong>Expansion</strong>：当一个节点选择具有未发泡的孩子 - 也就是这个节点表示的状态，它的存在可以采取，但还没有尝试过的动作 - 这些子节点之一将扩展选择，这意味着模拟 从该状态开始完成。 选择要扩展的子项时，将随机执行所选的操作。</p>
-</li>
-<li><p><strong>Simulation</strong>：扩展节点后，将从刚刚扩展的非终端状态开始模拟，并且模拟将持续到游戏结束以生成估计值。 通常，这将随机执行，直到游戏获胜或失败为止。 游戏结束时的状态将用作此模拟的奖励，并将传播到搜索树。</p>
-</li>
-<li><p><strong>Backpropagation</strong>：将此奖励添加到新节点的总奖励Χ中。 奖励还将“备份”到其父节点（父节点的父节点），直到树的root。</p>
-</li>
-</ul>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function msctsSearch()
-    while within time limit do
-        v ← treePolicy()
-        delta ← rollOut()
-        backUp(v, delta)
-    end while
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以下分享的技巧是以<strong>不同方式</strong>针对<strong>不同游戏</strong>起作用的<strong>一般建议</strong>。这些技巧是关卡设计师用来移动玩家，鼓励探索并创建沉浸式游戏区域的方法。每个游戏都是不同的，因此每个游戏都需要不同的方法。</p>
+<p>技巧的选择绝不是关卡设计的“规则”。我认为，没有规则，只有准则才有助于创造最佳体验。每个设计师都有自己的创建关卡和解决问题的方法，因此我们应该以这些技巧和窍门为参考，而不是将之作为关卡设计的“铁”则。</p>
+<h2 id="1-清晰明了的“Affordances”"><a href="#1-清晰明了的“Affordances”" class="headerlink" title="1. 清晰明了的“Affordances”"></a>1. 清晰明了的“Affordances”</h2><p><strong>Affordances</strong>是对象的属性，它向玩家显示他们可以执行的操作。玩家应该能够感知并清楚地理解如何使用这些物品。例如，门上的推垫（图左）或拉杆（图右）会告诉您应采取什么措施打开门。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E9%97%A8%E6%8A%8A%E6%89%8B.jpg" alt="门把手"></p>
+<p><strong>Affordances</strong>在游戏中就是通过游戏关卡设计创建的规则。例如在《古墓丽影》中，如果玩家看到一块木板或一辆旧车在空中倾斜，他们就会很清楚地知道能够将其作为发射台来进行更远的跳跃。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E5%8F%A4%E5%A2%93%E4%B8%BD%E5%BD%B1.jpg" alt="古墓丽影"></p>
+<p>在游戏的关卡中，拥有清晰且一致的<strong>Affordances</strong>是非常重要的。设计者需要与玩家建立<strong>“信任连接”</strong>，以便玩家清楚地了解自己在游戏中可以做什么和不能做什么。设计者则应该避免违反这种<strong>“信任连接”</strong>。如果这样做，将会给玩家们造成混乱和挫败感。例如，当一扇门上面标识着“PUSH”但实际上需要去拉动时，在现实生活中有多烦人？</p>
+<p>当然这不是绝对的，有时候，一些游戏可能会需要设计者与玩家解除这种<strong>“信任连接”</strong>。例如在生存恐怖游戏中，破坏周围的<strong>Affordances</strong>是减轻压力和使玩家承受压力的好方法。即使这样也有着一定的风险，并可能最终激怒一些玩家。</p>
+<h2 id="2-引导线"><a href="#2-引导线" class="headerlink" title="2. 引导线"></a>2. 引导线</h2><p><strong>引导线（Leading lines）</strong>是一种有助于将玩家的视线引导到特定位置或事件的技术。</p>
+<p>这些<strong>Leading lines</strong>通常是通过建筑元素的排列和位置形成的，它可以巧妙地引导玩家的<strong>视线，移动和注意力</strong>，而无需其他明显的文字提示。引导线的范围可以从天花板上的管道，树篱行或地板和墙壁上的不同纹理。这些方向性元素增强了互连空间的流动性，它们利用物理世界的属性有效地将玩家引导到了设计师想要它们去的地方。这些应与照明和其他技术结合使用。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/direction_lines.jpg" alt="Leading lines"></p>
+<h2 id="3-利用架构来塑造游戏空间"><a href="#3-利用架构来塑造游戏空间" class="headerlink" title="3. 利用架构来塑造游戏空间"></a>3. 利用架构来塑造游戏空间</h2><p>设计者应该始终关注现实生活空间以及它们的体系结构如何转换为关卡设计。几百年来，建筑师与关卡设计师一直在做同样的事情，因此了解建筑元素是有意义的。</p>
+<p>应该使用建筑元素来塑造关卡设计。结构组件是用于组织和塑造空间的工具。在用板条箱作为障碍之前，请考虑一下您的体系结构可以做什么。与其将板条箱放置在开放区域中，不如放置也可以用作掩体的柱子，设计者要创造一个更可信、合理的空间。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E6%8E%A9%E4%BD%93.jpg" alt="游戏中柱子掩体"></p>
+<p>通过查看现实生活中的空间，您可以找到使用直观的建筑元素创建更可信的关卡的方法。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E6%9F%B1%E5%AD%90.jpg" alt="现实中柱子掩体"></p>
+<h2 id="4-教学机制"><a href="#4-教学机制" class="headerlink" title="4. 教学机制"></a>4. 教学机制</h2><p>关卡设计的工作之一是给玩家介绍，调整节奏并教导游戏的基本操作。</p>
+<p>作为游戏的设计师，您会非常了解自己的游戏机制，所以对于您来说，这意味着挑战很容易。而对于大部分玩家来说，尤其是新玩家，必要的机械教学是他们是否能够继续玩下去的基础。例如类似《守望先锋》等射击类型游戏，新手教学一般都是以<strong>方向移动</strong>→<strong>定点目标射击</strong>→<strong>移动目标射击</strong>→<strong>特殊技能使用</strong>→<strong>AI实战模拟</strong>的流程去引导玩家。</p>
+<img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E6%95%99%E5%AD%A6%E6%9C%BA%E5%88%B6.png" alt="守望先锋" style="zoom:67%;" />
 
-function mostVisitedAction()
-    return the most visited action
+<p>当然，教学机制是循循渐进的，设计者不能在一开始就以最高难度的级别去指导玩家，通常以<strong>简单</strong>→<strong>一般</strong>→<strong>困难</strong></p>
+<p>的层次去区分教学机制。</p>
+<p><strong>注意</strong>：新手教学一定要避免大量文字叙述，甚至完全文字叙述，这会极大削弱新玩家对于游戏的热情，通常我们以<strong>实际操作</strong>+<strong>旁白语音</strong>+<strong>极简文字显示</strong>的方式去建立新手教学。另外，对于一些本身操作复杂的游戏，我们除了必要基础教学外，可以在设置栏上附加操作说明（通常以图片+文字叙述）以方便玩家在游戏过程中随时查看。</p>
+<img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E6%8E%A7%E5%88%B6%E8%AF%B4%E6%98%8E.jpg" alt="控制说明" style="zoom:67%;" />
 
-function treePolicy()
-    while state is nontermimal do
-    if state not fully expanded then
-        return expand(state)
-    else
-        uct(state) # default tree policy
+<h2 id="5-拒绝和奖励策略"><a href="#5-拒绝和奖励策略" class="headerlink" title="5. 拒绝和奖励策略"></a>5. 拒绝和奖励策略</h2><p>拒绝和奖励策略是一种建筑技术，主要用于丰富人在建筑环境中的通道。建筑师通过向人们提供其目标的视图，然后暂时从视线中对其进行筛选来做到这一点。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E5%BB%BA%E7%AD%91.jpg"></p>
+<p>我们可以将相同的技术用于关卡设计中的进度，以增强玩家的进度感。让玩家先看到他们的目标，然后引导他们到不再能看到它的路线上，接着再以新的可视角度使他们靠近目标。</p>
+<p>下图显示了如何使用拒绝和奖励策略来开始关卡。玩家首先可以清楚地看到目标，但直达路径被阻塞（无法通过），同时被赋予了通往目标的替代路线（即引导玩家进入这个路线以接近目标）。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E8%A7%86%E8%A7%921.jpg" alt="远视角"></p>
+<p>而到了下图，通过之前的代替路径后，玩家又拥有一个新的可视角度，这次目标建筑距离玩家更近，而更近的目标将使他们获得真正的进步感。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E8%A7%86%E8%A7%922.jpg" alt="近视角"></p>
+<p>在《The Last Of Us》的一个章节中，设计者运用了拒绝和奖励策略：先让玩家瞥见黄色桥梁（它们的目标位置），然后暂时看不见它，最后直到它重新出现为止。这样的游戏策略激起玩家前进的动力，使玩家的旅途更加有趣。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E6%B8%B8%E6%88%8F%E8%A7%86%E8%A7%92.jpg" alt="The Last Of Us"></p>
+<h2 id="6-提供一个良好的起点"><a href="#6-提供一个良好的起点" class="headerlink" title="6. 提供一个良好的起点"></a>6. 提供一个良好的起点</h2><p>玩家如何到达某个区域将影响他们的第一步。在起点，让玩家面对正确的方向，并确保他们的开始位置可以为他们提供<strong>视觉提示</strong>和<strong>选择方式</strong>。</p>
+<p>下图为《神秘海域4》中的截图，它演示了如何通过让玩家清楚地了解前方的<strong>道路</strong>，<strong>引导线</strong>和周围环境的<strong>架构</strong>，来清晰地了解目标位置以及玩家可以看到开口和其他位置，从而提高玩家的起始位置<strong>选项</strong>。该示例使用了多种技术，但关键是要了解所有这些方法如何与起始位置结合使用，方便玩家清楚地了解自己的工作。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E8%89%AF%E5%A5%BD%E7%9A%84%E8%B5%B7%E7%82%B9.jpg"></p>
+<p>有时这种技巧也可能会改变。 例如，玩家的路径或出口可以位于他们的后面或上方，但只要玩家对此有清晰的信息，就可以鼓励地图探索和发现，从而创造出非常有益的体验。</p>
+<h2 id="7-边界设计"><a href="#7-边界设计" class="headerlink" title="7. 边界设计"></a>7. 边界设计</h2><p>边界是一种显示玩家在区域之间转换时的方式。边界有两种类型：<strong>实心边界（solid boundaries）</strong>和<strong>软边界（soft boundaries）</strong>。</p>
+<h3 id="1-实心边界"><a href="#1-实心边界" class="headerlink" title="(1) 实心边界"></a>(1) 实心边界</h3><p>实心边界可用于标记出意外或敌方活动的区域。设计者不希望玩家知道里面的东西，而是希望他们清楚地了解他们正在改变位置。这样一来，您就可以为该地区的许多敌人创造一种惊喜和不确定性的元素。这是在开放世界游戏的关卡设计中将玩家引导到特定入口点的一种极好的方法，因此设计者可以创建更多脚本化的序列。</p>
+<p>例如，下图清楚地表明了，玩家面前的边界后面是敌人区域。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E5%AE%9E%E5%BF%83%E8%BE%B9%E7%95%8C.jpg" alt="实心边界"></p>
+<h3 id="2-软边界"><a href="#2-软边界" class="headerlink" title="(2) 软边界"></a>(2) 软边界</h3><p>软边界与实心边界正好相反，设计者希望玩家能够看到边界里面的东西，并将玩家吸引到该区域。如下图《和平精英》中的围墙、栅栏、铁丝网等都属于软边界。</p>
+<img src="https://github.com/JianxiangGao/hexo_blog_img/blob/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E8%BD%AF%E8%BE%B9%E7%95%8C.png?raw=true" style="zoom: 67%;" />
 
-function rollOut()
-    while rollOut not finished then
-        depth ← depth + 1
-    return root state heuristic
+<h2 id="8-面包屑导航"><a href="#8-面包屑导航" class="headerlink" title="8. 面包屑导航"></a>8. 面包屑导航</h2><p><strong>面包屑导航（Breadcrumb）</strong>是一种导航辅助，其通常被用于网页设计，是用户在程序或文件中确定和转移他们位置的一种方法。在游戏设计中，我们也通常运用这种方法。</p>
+<p>面包屑导航可以有很多不同的形式，可以通过设计地面上的不同质地，来吸引玩家朝特定路径上前进。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E9%9D%A2%E5%8C%85%E5%B1%911.jpg"></p>
+<p>或者沿着小路利用金币或其他道具点缀，来使玩家重回正轨。</p>
+<p><img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/%E9%9D%A2%E5%8C%85%E5%B1%912.jpg"></p>
+<h2 id="9-照明"><a href="#9-照明" class="headerlink" title="9. 照明"></a>9. 照明</h2><p>有效利用照明可以将玩家的注意力引向空间内的某个位置。正如下图所示，聚光灯经常在黑暗的环境中被使用，以引导玩家的视线转向感兴趣的区域，玩家可以看到入口/出口、敌人位置。在这种情况下，光线会增强门作为当前场景中最重要的对象，从而提高了玩家对它背后可能存在的期望。</p>
+<img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/lighting_direct_attention.jpg" style="zoom: 80%;" />
 
-function backUp(node, result)
-    visits ← visits + 1
-    totalValue ← totalValue + result</code></pre>
-<h3 id="UCT-algorithm"><a href="#UCT-algorithm" class="headerlink" title="UCT algorithm"></a>UCT algorithm</h3><p>根据子节点的总得分，访问次数和Agent的得分，计算出该节点的得分，然后选择得分最高的节点并返回。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function UCT()
-    for children nodes do
-        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
-        uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
-
-    # break ties randomly
-
-    roll(state, actions)
-
-    return node with the max value</code></pre>
-<h3 id="Bayesian-UCT-algorithm"><a href="#Bayesian-UCT-algorithm" class="headerlink" title="Bayesian UCT algorithm"></a>Bayesian UCT algorithm</h3><p>UCT值的计算被central-limit theory的原理所取代(<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1203.3519">Tesauro, Rajan and Segal, 2012</a>)。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function Bayesian UCT()
-    for children nodes do
-        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
-        uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
-                   * standard_deviation
-
-    roll(state, actions)
-
-    return node with the max value</code></pre>
-<h3 id="UCB1-tuned-algorithm"><a href="#UCB1-tuned-algorithm" class="headerlink" title="UCB1-tuned algorithm"></a>UCB1-tuned algorithm</h3><p>UCT函数结合了方差和特定节点的访问(<a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1023/A:1013689704352">Auer, Cesa-Bianchi and Fischer, 2002</a>)。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function UCB1-tuned()
-    for children nodes do
-        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
-        v<-variance+sqrt(2*Ln(parentVisitTimes+1)/(childVisitTimes+ϵ))
-        v<- min(v,1/4)
-        uctValue ← childValue + sqrt(v*Ln (parentVisitTimes+1)/(childVisitTimes+ϵ))
-
-    roll(state, actions)
-
-    return node with the max value</code></pre>
-<h3 id="Single-player-MCTS-algorithm"><a href="#Single-player-MCTS-algorithm" class="headerlink" title="Single-player MCTS algorithm"></a>Single-player MCTS algorithm</h3><p>添加了UCB公式的第三部分，其中包含方差和访问时间，这与UCB1- tunned算法的相似。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function SP_MCTS()
-    constant D
-    for children nodes do
-        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
-        uctValue ← childValue + sqrt(2*Ln (parentVisitTimes+1)/(childVisitTimes+ϵ)) 
-                   + sqrt(variance+D/(childVisitTimes+ϵ))
-
-    roll(state, actions)
-
-    return node with the max value</code></pre>
-<h3 id="AMAF-algorithm"><a href="#AMAF-algorithm" class="headerlink" title="AMAF algorithm"></a>AMAF algorithm</h3><p>基本AMAF算法在每次play-out后将UCT与AMAF更新结合在一起。 该算法可快速增加UCT树中节点的计数，从而提高算法对获胜率的confidence(<a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.183.7924&rep=rep1&type=pdf">Helmbold and Parker-Wood, 2009</a>)。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function AMAF()
-    for children nodes do
-        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
-        uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
-
-        AMAFchildValue ← normalize(AMAFTotalValue/(AMAFVisitTimes+ϵ))
-        AMAFValue ← AMAFchildValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
-
-    return node with the max value</code></pre>
-<h3 id="α-AMAF-algorithm"><a href="#α-AMAF-algorithm" class="headerlink" title="α - AMAF algorithm"></a>α - AMAF algorithm</h3><p>α-AMAF算法在每个节点上混合两组计数。 一种是标准更新，另一种是AMAF更新(<a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.183.7924&rep=rep1&type=pdf">Helmbold and Parker-Wood, 2009</a>)。 score的计算公式如下：<br>$$<br>αA+(1-α)U<br>$$<br>其中A是AMAF分数，U是UCT分数，α是[0,1]范围内的加权参数。 在上述公式中，α= 0表示标准UCT算法，α= 1表示基本AMAF算法。当α= 0.1-0.3时，可以将α-AMAF算法最优化，经过测试，在这里，我们将α设置为0.15。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function a_AMAF()
-    for children nodes do
-        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
-        uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
-
-        AMAFchildValue ← normalize(AMAFTotalValue/(AMAFVisitTimes+ϵ))
-        AMAFValue ← AMAFchildValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
-
-        alphaAMAFValue ← (alpha*AMAFValue)+((1 - alpha)*uctValue)
-
-    return node with the max value</code></pre>
-<h3 id="Cutoff-AMAF-algorithm"><a href="#Cutoff-AMAF-algorithm" class="headerlink" title="Cutoff AMAF algorithm"></a>Cutoff AMAF algorithm</h3><p>Cutoff AMAF用于“warm-up(预热)”树中的计数，然后使用精确的标准更新(UCT)去完善估算值(<a target="_blank" rel="noopener" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.183.7924&rep=rep1&type=pdf">Helmbold and Parker-Wood, 2009</a>)。 定义参数k， 当迭代次数小于k时，将使用AMAF算法更新数据；当迭代次数大于k时，将使用UCT算法。当k = 0时，即标准UCT算法。 为了使Cutoff AMAF算法可以得到最大程度的优化，在这里，我们将cutoff的值设置为150。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function cutoff_AMAF()
-    if n < times times then # times=150
-        AMAF()
-    else
-        uct()</code></pre>
-<h3 id="ε-greedy-algorithm"><a href="#ε-greedy-algorithm" class="headerlink" title="ε - greedy algorithm"></a>ε - greedy algorithm</h3><p>epsilon-Greedy算法是Multiarmed Bandit Algorithms(MBA)之一。 为了解决“Explore-Exploit”难题，有必要使收益最大化。 ε-贪心算法会添加一个参数ε，该参数代表执行“Explore”的可能性。 例如，ε= 0.1，表示执行“ Explore”操作的可能性为10％，而“ Exploit”操作的概率为90％，这意味着当前最好的手臂摇动。 换句话说，如果以次数（即每10次操作）来计数投币机的机械臂摆动过程，则只有一个操作可以探索（尝试其他机械臂）。</p>
-<p>这里，我们的agent将具有较小的ε（= 1e-6）概率来随机选择未知action，然后具有1-ε的概率来选择现有actions中具有最大价值的action。 </p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function e_Greedy()
-    if ϵ*N finished then
-        for ϵ * Visit times do
-        select a random action
-        return node with the max value
-    else
-        for (1-ϵ) * Visit times do
-            childValue ← childTotalValue/(childVisitTimes+ϵ)
-            e_GreedyValue ← childValue + (1/(childVisitTimes+ϵ+1)) * (SumChildValue/NumChildValue - childValue)
-
-return node with the max value</code></pre>
-<h3 id="Decaying-ε-greedy-algorithm"><a href="#Decaying-ε-greedy-algorithm" class="headerlink" title="Decaying ε - greedy algorithm"></a>Decaying ε - greedy algorithm</h3><p>考虑到在传统的ε - greedy algorithm中，将epsilon设置为较低的固定值时，获得的解不一定是最优解。 由于Q学习初期的贪婪率可能太高，因此很容易输入局部最优解。 因此，我们尝试了“衰减的Epsilon-Greedy”策略，并使每一次roll的epsilon都是衰减的。</p>
-<p>Decaying ε - greedy algorithm和ε - greedy algorithm之间的区别在于，Decaying ε - greedy algorithm使用衰减的epsilon值来权衡开发和勘探。 此策略是使每次迭代的epsilon值都接近于0。 随着AI agents对环境的了解越来越多，利用率也随之提高，导致Q值几乎没有变化。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function e_Greedy_Decay()
-    if ϵ*N finished then
-        for ϵ * Visit times do
-            select a random action
-            decaying ϵ ← ϵ/100000
-        return node with the max value
-    else
-        for (1-ϵ) * Visit times do
-            childValue ← childTotalValue/(childVisitTimes+ϵ)
-            e_GreedyValue ← childValue + (1/(childVisitTimes+ϵ+1)) * (SumChildValue/NumChildValue - childValue)
-            decaying ϵ ← ϵ/100000
-
-return node with the max value</code></pre>
-<h3 id="First-Play-Urgency-algorithm-FPU"><a href="#First-Play-Urgency-algorithm-FPU" class="headerlink" title="First Play Urgency algorithm (FPU)"></a>First Play Urgency algorithm (FPU)</h3><p>根据<a target="_blank" rel="noopener" href="https://hal.archives-ouvertes.fr/hal-00115330/">Gelly(2006)</a>的研究，当迭代数与选择的动作数相比不够大时，常规的UCT方法可能效率较低。 如果某个动作每次都返回极高的值（在我们的环境中为+1），那么过多关注其他探索方法是不明智的。 因此，实施FPU方法是为了更好地利用潜在的有希望的行动。</p>
-<p>FPU的扩展方法被集成到UCT函数中，其中每个未扩展节点的等效uct值等于FPU值（FPU的参数）。 如果未扩展的节点被认为具有等效的uct值，则扩展该节点并将其作为树策略输出。 其他部分与UCT方法相似。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function FPU()
-    pre-defined parameter:FPU-value
-    for children nodes do
-        if the node is not expanded
-          uctValue<-FPU-value
-        else
-          childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
-          uctValue ← childValue + sqrt((2Ln parentVisitTimes+1)/(childVisitTimes+ϵ))
-
-    if node with the max uctValue is not expanded
-        expand the node
-
-    roll(state, actions)
-
-    return node with the max value</code></pre>
-<h3 id="Progressive-Bias-algorithm"><a href="#Progressive-Bias-algorithm" class="headerlink" title="Progressive Bias algorithm"></a>Progressive Bias algorithm</h3><p>Progressive Bias是MCTS和基于域的启发式方法的组合，将包含基于域的启发式方法的第三个term添加到UCT公式中。 由于迭代次数太有限，因此启发式方法可以获取更多的信息(<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/6145622?casa_token=9T6wycv58SYAAAAA:89qE1ulJUV_7JyL5w2I8TZFDfAKPZH-n5wH8fXvhQhsTL4vnZA9Ugl5-p-6miWsAUoVlYeey-g">Browne，2012</a>)。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function ProgressiveMCTS()
-    for children nodes do
-        childValue ← normalize(childTotalValue/(childVisitTimes+ϵ))
-        uctValue ← childValue + sqrt(2*Ln (parentVisitTimes+1)/(childVisitTimes+ϵ)) + child_heuristic/(childVisitTimes+1)
-
-    roll(state, actions)
-
-    return node with the max value</code></pre>
-<h3 id="Minimax-algorithm"><a href="#Minimax-algorithm" class="headerlink" title="Minimax algorithm"></a>Minimax algorithm</h3><p>Minimax是博弈论中的决策规则，并且已被证明在对抗回合制游戏中非常有效(<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1208.1940">Ontañón, 2012</a>)。 它旨在降低最坏情况发生时的损失，它是基于这样的假设，即对手会尝试使您进入最坏情况。 考虑到对手将您的奖励降到最低，Minimax的目的是找到最佳（最大价值）策略。</p>
-<p>在我们的minimax实现中，每个节点都有2个临时值，一个包含节点中生成的所有分数中的最小值，另一个包含子节点中所有值的最大值。 节点的最终值定义为2个临时值中的最小值。 </p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function minimax(node, result)
-    the node has 2 temp-values:v1,v2
-    if the result is generated in this node
-        v1=min(v1,result)
-    else # the result is propagated from children node
-        v2=max(children.value for all not-null children)
-    value=min(v1,v2)
-    #the “value” has the same function as TotalValue/visit in normal backup method </code></pre>
-<h3 id="Weighted-backup-algorithm"><a href="#Weighted-backup-algorithm" class="headerlink" title="Weighted backup algorithm"></a>Weighted backup algorithm</h3><p>根据<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/5369603?casa_token=HUgRambJDhAAAAAA:oWACdZP71a9AwXpOURL_Jc-puKh1nE5CFLhVJvb0AcdvtrzNnC2ZRhYSIAQyVrK08sPELnAn6g">Xie 和 Liu (2009)</a>的观点，有时使用平均分作为某种方法的评估并不是最佳选择，应该认为某些分数比其他分数更重要。Xie指出，在multi-arm bandit问题中，由于其准确性更高，因此应考虑后期模拟更为重要。</p>
-<p>由于与游戏的所有不同情况相比，迭代次数太少，因此minimax方法可能无法达到预期的效率，因此将加权后备方法实现为minimax与平均得分后备方法之间的平衡。根据minimax的原理，关于备份方法，我们有2个假设：</p>
-<ul>
-<li>如果在同一节点上生成了2个不同的分数（终止或达到最大深度），则在FFA模式下，较低值的分数应被视为更重要，因为对手特工更可能使您处于更糟的境地。就团队模式而言，这要视情况而定，因为您的队友将更有可能使您处于更好的状况。</li>
-<li>如果将2个不同的分数反向传播到同一节点，则具有较高价值的分数应被视为更重要，因为代理将尝试选择有前途的行动，而不是不良的行动。</li>
-</ul>
-<p>因此，我们假设满足上述两个假设的适当加权方法将改善MCTS的性能。</p>
-<pre class=" language-pseudocode"><code class="language-pseudocode">function backUp(node, result)
-    weight w is determined by result and 
-        whether the result is generated or back-propagated
-    visit <- visit + w*result
-    totalValue <- totalValue+w*result</code></pre>
+<h2 id="10-迭代测试"><a href="#10-迭代测试" class="headerlink" title="10. 迭代测试"></a>10. 迭代测试</h2><p>当我们设计完游戏关卡，想要使我们的游戏达到良好水平，就需要持续迭代的测试。通过初始的游戏测试，设计者将发现问题，找到解决方案并开始提高自己的水平。</p>
+<p>别害怕让人们玩我们设计的游戏，毕竟这就是我们创造游戏的原因！</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上整理的的10个关卡设计技巧，只能作为游戏设计的参考，而不是游戏设计的规则，后续我也会继续分享详细的关卡设计技巧。</p>
 
             </div>
             <hr/>
@@ -669,7 +468,7 @@ return node with the max value</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://JianxiangGao.github.io/2021/01/05/you-hua-pommerman-yi/">http://JianxiangGao.github.io/2021/01/05/you-hua-pommerman-yi/</a>
+                    <a href="http://JianxiangGao.github.io/2021/04/25/guan-qia-she-ji-de-10-ge-ji-qiao/">http://JianxiangGao.github.io/2021/04/25/guan-qia-she-ji-de-10-ge-ji-qiao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -707,12 +506,8 @@ return node with the max value</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/AI/">
-                                    <span class="chip bg-color">AI</span>
-                                </a>
-                            
-                                <a href="/tags/Monte-Carlo-tree-search/">
-                                    <span class="chip bg-color">Monte Carlo tree search</span>
+                                <a href="/tags/Level-Design/">
+                                    <span class="chip bg-color">Level Design</span>
                                 </a>
                             
                         </div>
@@ -1017,16 +812,17 @@ return node with the max value</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/01/06/you-hua-pommerman-er/">
+                <a href="/2021/04/25/guan-qia-she-ji-de-10-ge-ji-qiao/">
                     <div class="card-image">
                         
-                        <img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%9F%BA%E4%BA%8EMCTS%E7%AE%97%E6%B3%95%E7%9A%84Pommerman%E6%B8%B8%E6%88%8FAI%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E5%8C%96/feature.jpg" class="responsive-img" alt="基于MCTS算法的Pommerman游戏AI代理的优化(二)">
+                        <img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E5%85%B3%E5%8D%A1%E8%AE%BE%E8%AE%A1%E7%9A%8410%E4%B8%AA%E6%8A%80%E5%B7%A7/feature.jpg" class="responsive-img" alt="关卡设计的10个技巧">
                         
-                        <span class="card-title">基于MCTS算法的Pommerman游戏AI代理的优化(二)</span>
+                        <span class="card-title">关卡设计的10个技巧</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1036,30 +832,27 @@ return node with the max value</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-06
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE-AI/" class="post-category">
-                                    项目-AI
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%90%91/" class="post-category">
+                                    个人向
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/AI/">
-                        <span class="chip bg-color">AI</span>
-                    </a>
-                    
-                    <a href="/tags/Monte-Carlo-tree-search/">
-                        <span class="chip bg-color">Monte Carlo tree search</span>
+                    <a href="/tags/Level-Design/">
+                        <span class="chip bg-color">Level Design</span>
                     </a>
                     
                 </div>
@@ -1073,30 +866,30 @@ return node with the max value</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/12/18/breakout/">
+                <a href="/2021/04/22/shen-tan-you-xi-xing-ye-xian-zhuang/">
                     <div class="card-image">
                         
-                        <img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E6%B7%B1%E5%BA%A6Q%E5%AD%A6%E4%B9%A0%E2%80%94Breakout%E6%B8%B8%E6%88%8F/featureimage.jpg" class="responsive-img" alt="深度Q学习—Breakout游戏">
+                        <img src="https://raw.githubusercontent.com/JianxiangGao/hexo_blog_img/master/%E6%B7%B1%E8%B0%88%E6%B8%B8%E6%88%8F%E8%A1%8C%E4%B8%9A%E7%8E%B0%E7%8A%B6/featureimage.jpg" class="responsive-img" alt="深谈游戏行业现状">
                         
-                        <span class="card-title">深度Q学习—Breakout游戏</span>
+                        <span class="card-title">深谈游戏行业现状</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            对于近两年国内外游戏行业出现的现象，我做了深入的了解与思考。这篇文章涉及的领域多样，内容偏长，希望读者慢慢阅读。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-22
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE-AI/" class="post-category">
-                                    项目-AI
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%90%91/" class="post-category">
+                                    个人向
                                 </a>
                             
                             
@@ -1106,12 +899,8 @@ return node with the max value</code></pre>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/AI/">
-                        <span class="chip bg-color">AI</span>
-                    </a>
-                    
-                    <a href="/tags/Deep-Q-Network/">
-                        <span class="chip bg-color">Deep Q-Network</span>
+                    <a href="/tags/Game/">
+                        <span class="chip bg-color">Game</span>
                     </a>
                     
                 </div>
